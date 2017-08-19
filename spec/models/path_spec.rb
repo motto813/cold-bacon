@@ -1,29 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe Path, type: :model do
+  let!(:actor1) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "profile.jpg") }
+  let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
 
   context "has attributes that pass validation" do
-    let(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "profile.jpg") }
     let(:movie) { Movie.create!(title: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
     let(:game) { Game.create! }
 
     it "is a Path object" do
-      path = Path.create!(game_id: game.id, traceable: actor)
+      path = Path.create!(game_id: game.id, traceable: actor1)
       expect(path).to be_instance_of Path
     end
 
     it "has a game id" do
-      path = Path.create!(game_id: game.id, traceable: actor)
+      path = Path.create!(game_id: game.id, traceable: actor1)
       expect(path.game_id).to eq Game.first.id
     end
 
     it "can have a actor and access the name" do
-      path = Path.create!(game_id: game.id, traceable: actor)
+      path = Path.create!(game_id: game.id, traceable: actor1)
       expect(path.traceable.name).to eq "Bill Murray"
     end
 
     it "can have a Actor object" do
-      path = Path.create!(game_id: game.id, traceable: actor)
+      path = Path.create!(game_id: game.id, traceable: actor1)
       expect(path.traceable).to be_instance_of Actor
     end
 
