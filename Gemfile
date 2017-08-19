@@ -35,6 +35,9 @@ gem 'jbuilder', '~> 2.5'
 # The Movie Database Ruby Wrapper
 gem 'themoviedb'
 
+# JSON gem for parsing json
+gem 'json'
+
 # group :test do
 #   # Database cleaner
 #   gem 'database_cleaner'
