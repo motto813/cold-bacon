@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Game, type: :model do
   context "it creates a Game object" do
-    let(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
-    let(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
+    let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
+    let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
 
-    let!(:game) { Game.create!(starting_actor: actor1, ending_actor: actor2) }
+    let(:game) { Game.create! }
 
     it "is a Game object" do
       expect(game).to be_instance_of Game
