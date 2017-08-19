@@ -15,8 +15,8 @@ RSpec.describe "Game Management", type: :request do
       post "/games"
       game = JSON.parse(response.body)
 
-      expect(game["starting_actor"]["name"]).to be_a String
-      expect(game["ending_actor"]["name"]).to be_a String
+      expect(game["starting_actor"]["name"]).to eq("Sam").or(eq("Jack"))
+      expect(game["ending_actor"]["name"]).to eq("Sam").or(eq("Jack"))
     end
   end
 
