@@ -27,6 +27,7 @@ RSpec.describe "Game Management", type: :request do
   describe "shows the game status" do
     let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
     let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
+    let!(:movie) { Movie.create!(title: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
 
     context "a game has just been started" do
       it "responds with a JSON object with a starting and ending actor" do
@@ -41,11 +42,56 @@ RSpec.describe "Game Management", type: :request do
 
     context "a game has at least one actor path saved" do
       let!(:game) { Game.create! }
-      xit "responds with a JSON object with a path that has an actor" do
-        post "/games/#{assigns(:game).id}/paths", params: { actor_id: actor1.id }
 
-        # game = JSON.parse(response.body)
+      it "saves an actor path and responds with a JSON object with a path that has an actor" do
 
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor1.id } }
+
+        get "/games/#{assigns(:game).id}"
+        game = JSON.parse(response.body)
+
+        expect(game["paths"].first["traceable_type"]).to eq "Actor"
+        expect(game["paths"].first["traceable_id"]).to eq actor1.id
+      end
+    end
+
+    context "a game has at least one movie path saved" do
+      let!(:game) { Game.create! }
+
+      it "saves an movie path and responds with a JSON object with a path that has an movie" do
+
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Movie", traceable_id: movie.id } }
+
+        get "/games/#{assigns(:game).id}"
+        game = JSON.parse(response.body)
+
+        expect(game["paths"].first["traceable_type"]).to eq "Movie"
+        expect(game["paths"].first["traceable_id"]).to eq movie.id
+      end
+    end
+  end
+
+  describe "creating a path" do
+    let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
+    let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
+    let!(:movie) { Movie.create!(title: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
+    let!(:game) { Game.create! }
+
+    context "creating an actor path" do
+      it "redirects to an actor if an actor path is created" do
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor1.id } }
+
+        expect(response).to redirect_to actor1
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    context "creating a movie path" do
+      it "redirects to a movie if a movie path is created" do
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Movie", traceable_id: movie.id } }
+
+        expect(response).to redirect_to movie
+        expect(response).to have_http_status(302)
       end
     end
   end

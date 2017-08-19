@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
-    render json: { starting_actor: @game.starting_actor, ending_actor: @game.ending_actor, path: @game.paths }
+    render json: { starting_actor: @game.starting_actor, ending_actor: @game.ending_actor, paths: @game.paths }
   end
 
   def create
