@@ -33,7 +33,7 @@ RSpec.describe "Game Management", type: :request do
   end
 
   describe "find an actor's top movies index" do
-    context "requests from an actor with top movies" do
+    context "requests from an actor that has top movies" do
       let!(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "bill.jpg") }
 
       it "returns OK with content type as JSON" do
@@ -51,6 +51,30 @@ RSpec.describe "Game Management", type: :request do
 
           movies = JSON.parse(response.body)
           movies.each { |movie| expect(movie["title"].length).to be > 0 }
+        end
+      end
+    end
+  end
+
+  describe "find a movie's top actors index" do
+    let!(:movie) { Movie.create!(title: "The Rock", tmdb_id: 9802, image_url: "the-rock.jpg") }
+
+    context "requests from a movie that has top billed actors" do
+      it "returns OK with content type as JSON" do
+        VCR.use_cassette "Movie The Rock" do
+          get "/movies/#{movie.id}/actors"
+
+          expect(response.content_type).to eq("application/json")
+          expect(response).to have_http_status(200)
+        end
+      end
+
+      it "returns a JSON with actors" do
+        VCR.use_cassette "Movie The Rock" do
+          get "/movies/#{movie.id}/actors"
+
+          actors = JSON.parse(response.body)
+          actors.each { |actor| expect(actor["name"].length).to be > 0 }
         end
       end
     end
