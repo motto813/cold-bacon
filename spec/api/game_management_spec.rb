@@ -9,16 +9,8 @@ RSpec.describe "Game Management", type: :request do
       it "returns OK with content type as JSON" do
         post "/games"
 
-        expect(response.content_type).to eq("application/json")
-        expect(response).to have_http_status(200)
-      end
-
-      it "returns a json with a starting and ending actor" do
-        post "/games"
-        game = JSON.parse(response.body)
-
-        expect(game["starting_actor"]["name"]).to eq("Sam").or(eq("Jack"))
-        expect(game["ending_actor"]["name"]).to eq("Sam").or(eq("Jack"))
+        expect(response).to redirect_to assigns(:game)
+        expect(response).to have_http_status(302)
       end
     end
 
@@ -28,6 +20,32 @@ RSpec.describe "Game Management", type: :request do
 
         expect(response.body).to eq ""
         expect(response).to have_http_status(400)
+      end
+    end
+  end
+
+  describe "shows the game status" do
+    let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
+    let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
+
+    context "a game has just been started" do
+      it "responds with a JSON object with a starting and ending actor" do
+        post "/games"
+        get "/games/#{assigns(:game).id}"
+        game = JSON.parse(response.body)
+
+        expect(game["starting_actor"]["name"]).to eq("Sam").or(eq("Jack"))
+        expect(game["ending_actor"]["name"]).to eq("Sam").or(eq("Jack"))
+      end
+    end
+
+    context "a game has at least one actor path saved" do
+      let!(:game) { Game.create! }
+      xit "responds with a JSON object with a path that has an actor" do
+        post "/games/#{assigns(:game).id}/paths", params: { actor_id: actor1.id }
+
+        # game = JSON.parse(response.body)
+
       end
     end
   end
