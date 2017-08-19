@@ -4,30 +4,60 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
+ import React, { Component } from 'react';
+ import {
   AppRegistry,
   StyleSheet,
   Text,
   View
 } from 'react-native';
 
-export default class client extends Component {
+class ActorDisplay extends Component {
   render() {
     return (
+      <Text>{this.props.actor.name}</Text>
+      );
+  }
+}
+
+export default class client extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+    }
+  }
+
+  componentDidMount() {
+    return fetch('http://localhost:3000/actors/1.json')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        isLoading: false,
+        actor: responseJson,
+      }, function() {
+        // do something with new state
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
+  render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={styles.container}>
+          <Text>Im a text</Text>
+        </View>
+      )
+    }
+
+    return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+      <ActorDisplay actor={this.state.actor}/>
       </View>
-    );
+      );
   }
 }
 
