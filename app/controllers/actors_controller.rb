@@ -4,7 +4,7 @@ class ActorsController < ApplicationController
     render json: @actor
   end
 
-  def create
-    @actor
-  end
+  # def create
+  #   @actor
+  # end
 end
