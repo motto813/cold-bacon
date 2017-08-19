@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   def index
     @actor = Actor.find(params[:actor_id])
-    @movies = @actor.top_movies
+    @movies = @actor.get_top_movies
   end
 
   def show
