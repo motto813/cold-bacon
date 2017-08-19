@@ -32,10 +32,13 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-#The Movie Database Ruby Wrapper
+# The Movie Database Ruby Wrapper
 gem 'themoviedb'
 
-
+# group :test do
+#   # Database cleaner
+#   gem 'database_cleaner'
+# end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

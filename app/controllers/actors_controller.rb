@@ -3,4 +3,8 @@ class ActorsController < ApplicationController
     @actor = Actor.find(params[:id])
     render json: @actor
   end
+
+  def create
+    @actor
+  end
 end
