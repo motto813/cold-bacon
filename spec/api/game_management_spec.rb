@@ -45,11 +45,12 @@ RSpec.describe "Game Management", type: :request do
         end
       end
 
-      it "returns a JSON with movies" do
+      it "returns a JSON with multiple movies" do
         VCR.use_cassette "Actor Bill Murray" do
           get "/actors/#{actor.id}/movies"
 
           movies = JSON.parse(response.body)
+          expect(movies.length).to be > 0
           movies.each { |movie| expect(movie["title"].length).to be > 0 }
         end
       end
@@ -69,11 +70,12 @@ RSpec.describe "Game Management", type: :request do
         end
       end
 
-      it "returns a JSON with actors" do
+      it "returns a JSON with multiple actors" do
         VCR.use_cassette "Movie The Rock" do
           get "/movies/#{movie.id}/actors"
 
           actors = JSON.parse(response.body)
+          expect(actors.length).to be > 0
           actors.each { |actor| expect(actor["name"].length).to be > 0 }
         end
       end

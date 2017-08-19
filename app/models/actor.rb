@@ -7,10 +7,12 @@ class Actor < ApplicationRecord
   validates_uniqueness_of :name, :tmdb_id
 
   def get_top_movies
-    movies = known_for_movies(search_api_for_actor)
-    movies.each do |movie|
-      movie = Movie.find_or_create_by(title: movie["title"], tmdb_id: movie["id"], image_url: movie["poster_path"])
-      Role.find_or_create_by(actor: self, movie: movie)
+    unless top_movies.count == number_of_top_movies
+      movies = known_for_movies(search_api_for_actor)
+      movies.each do |movie|
+        movie = Movie.find_or_create_by(title: movie["title"], tmdb_id: movie["id"], image_url: movie["poster_path"])
+        Role.find_or_create_by(actor: self, movie: movie)
+      end
     end
     top_movies
   end
@@ -24,5 +26,9 @@ class Actor < ApplicationRecord
 
   def known_for_movies(actor_object)
     actor_object.first["known_for"]
+  end
+
+  def number_of_top_movies
+    3
   end
 end
