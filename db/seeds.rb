@@ -1,7 +1,77 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Actor.create(name: '', tmdb_id: , image_url: '')
+# Movie.create(title: '', tmdb_id: , image_url: '')
+# Role.create(actor_id: , movie_id: )
+# Path.create(game_id: , traceable_type: '', traceable_id: )
+
+#######################################
+#++++++++++++++++ACTOR++++++++++++++++#
+#######################################
+Actor.create(name: 'Alexandra Daddario', tmdb_id: 109513, image_url: '/z636bIgZDE2HP6R3z9ij87F1sme.jpg')
+Actor.create(name: 'Amrita Acharia', tmdb_id: 1048692, image_url: '/tRtky8vDK9nFpf10Maiq85uCLUH.jpg')
+Actor.create(name: 'Andy Serkis', tmdb_id: 1333, image_url: '/nQRsxFveJaUIlZ4GYWDe9uJ6u2f.jpg')
+Actor.create(name: 'Beyoncé Knowles', tmdb_id: 14386, image_url: '/xYCtL5BpQFALZGYibVPFsebUs6q.jpg')
+Actor.create(name: 'Dwayne Johnson', tmdb_id: 18918, image_url: '/akweMz59qsSoPUJYe7QpjAc2rQp.jpg')
+Actor.create(name: 'Emilia Clarke', tmdb_id: 1223786, image_url: '/iNuaYKoWb7psag7Tg3eRucj5sn2.jpg')
+Actor.create(name: 'Emma Watson', tmdb_id: 10990, image_url: '/s77hUycSJ4x8RJWHDC9WPgotgxE.jpg')
+Actor.create(name: 'Gal Gadot', tmdb_id: 90633, image_url: '/h299BeSGjgjlhmLyRVJ0vrefhK.jpg')
+Actor.create(name: 'Henry Cavill', tmdb_id: 73968, image_url: '/h8bn6ybR5Hu58UGJGwb66nrOagV.jpg')
+Actor.create(name: 'Johnny Depp', tmdb_id: 85, image_url: '/ctaca3ALycPP0vPhRSYK5DTBEPF.jpg')
+Actor.create(name: 'Keanu Reeves', tmdb_id: 6384, image_url: '/bOlYWhVuOiU6azC4Bw6zlXZ5QTC.jpg')
+Actor.create(name: 'Lena Headey', tmdb_id: 17286, image_url: '/wcpy6J7KLzmVt0METboX3CZ0Jp.jpg')
+Actor.create(name: 'Rose Byrne', tmdb_id: 9827, image_url: '/laJdQNmsuR2iblYUggEqr49LvwJ.jpg')
+Actor.create(name: 'Scarlett Johansson', tmdb_id: 1245, image_url: '/8EueDe6rPF0jQU4LSpsH2Rmrqac.jpg')
+Actor.create(name: 'Tom Cruise', tmdb_id: 500, image_url: '/3oWEuo0e8Nx8JvkqYCDec2iMY6K.jpg')
+Actor.create(name: 'Vin Diesel', tmdb_id: 12835, image_url: '/3RdYMTLoL1X16djGF52cFtJovDT.jpg')
+Actor.create(name: 'Zoe Saldana', tmdb_id: 8691, image_url: '/ofNrWiA2KDdqiNxFTLp51HcXUlp.jpg')
+#######################################
+#++++++++++++++++MOVIE++++++++++++++++#
+#######################################
+Movie.create(title: '300', tmdb_id: 1271, image_url: '/bYR8O1H1ZlME7Dm9ysfTYZnRDpw.jpg')
+Movie.create(title: '300: Rise of an Empire', tmdb_id: 53182, image_url: '/gWQf5j3ZqEfOdW2rIZnkuOOva78.jpg')
+Movie.create(title: 'Austin Powers in Goldmember', tmdb_id: 818, image_url: '/tFR7dTbX5BsmoUwKHfa2cWoZbwK.jpg')
+Movie.create(title: 'Avatar', tmdb_id: 19995, image_url: '/kmcqlZGaSh20zpTbuoF0Cdn07dT.jpg')
+Movie.create(title: 'Batman v Superman: Dawn of Justice', tmdb_id: 209112, image_url: '/cGOPbv9wA5gEejkUN892JrveARt.jpg')
+Movie.create(title: 'Captain America: Civil War', tmdb_id: 271110, image_url: '/kSBXou5Ac7vEqKd97wotJumyJvU.jpg')
+Movie.create(title: 'Edge of Tomorrow', tmdb_id: 137113, image_url: '/tpoVEYvm6qcXueZrQYJNRLXL88s.jpg')
+Movie.create(title: 'Epic', tmdb_id: 116711, image_url: '/dUeXOJCpfWmZd9KaPkq2122J1ji.jpg')
+Movie.create(title: 'Fantastic Beasts and Where to Find Them', tmdb_id: 259316, image_url: '/dXwbjYyZH1Se0IS3oVcPdvueLKd.jpg')
+Movie.create(title: 'Fast & Furious 6', tmdb_id: 82992, image_url: '/b9gTJKLdSbwcQRKzmqMq3dMfRwI.jpg')
+Movie.create(title: 'Furious 7', tmdb_id: 168259, image_url: '/dCgm7efXDmiABSdWDHBDBx2jwmn.jpg')
+Movie.create(title: 'Guardians of the Galaxy', tmdb_id: 118340, image_url: '/y31QB9kn3XSudA15tV7UWQ9XLuW.jpg')
+Movie.create(title: 'Harry Potter and the Deathly Hallows: Part 2', tmdb_id: 12445, image_url: '/fTplI1NCSuEDP4ITLcTps739fcC.jpg')
+Movie.create(title: "Harry Potter and the Philosopher's Stone", tmdb_id: 671, image_url: '/dCtFvscYcXQKTNvyyaQr2g2UacJ.jpg')
+Movie.create(title: 'Harry Potter and the Prisoner of Azkaban', tmdb_id: 673, image_url: '/jUFjMoLh8T2CWzHUSjKCojI5SHu.jpg')
+Movie.create(title: 'Iron Man 2', tmdb_id: 10138, image_url: '/ArqpkNYGfcTIA6umWt6xihfIZZv.jpg')
+Movie.create(title: 'John Wick', tmdb_id: 245891, image_url: '/5vHssUeVe25bMrof1HyaPyWgaP.jpg')
+Movie.create(title: 'Man of Steel', tmdb_id: 49521, image_url: '/xWlaTLnD8NJMTT9PGOD9z5re1SL.jpg')
+Movie.create(title: 'Me Before You', tmdb_id: 296096, image_url: '/oN5lELHH5Xheiy0YdhnY3JB4hx2.jpg')
+Movie.create(title: 'Mission: Impossible - Ghost Protocol', tmdb_id: 56292, image_url: '/s58mMsgIVOFfoXPtwPWJ3hDYpXf.jpg')
+Movie.create(title: 'Oblivion', tmdb_id: 75612, image_url: '/hmOzkHlkGvi8x24fYpFSnXvjklv.jpg')
+Movie.create(title: 'Percy Jackson: Sea of Monsters', tmdb_id: 76285, image_url: '/k1bhUW7XM5X0yD3iewAEvloFBEo.jpg')
+Movie.create(title: 'Percy Jackson & the Olympians: The Lightning Thief', tmdb_id: 32654, image_url: '/5NhyXkodMzDRW8uqtPqlxJsoBhf.jpg')
+Movie.create(title: "Pirates of the Caribbean: Dead Man's Chest", tmdb_id: 58, image_url: '/waFr5RVKaQ9dzOt3nQuIVB1FiPu.jpg')
+Movie.create(title: 'Pirates of the Caribbean: The Curse of the Black Pearl', tmdb_id: 22, image_url: '/tkt9xR1kNX5R9rCebASKck44si2.jpg')
+Movie.create(title: 'San Andreas', tmdb_id: 254128, image_url: '/qey0tdcOp9kCDdEZuJ87yE3crSe.jpg')
+Movie.create(title: 'Saving Private Ryan', tmdb_id: 857, image_url: '/miDoEMlYDJhOCvxlzI0wZqBs9Yt.jpg')
+Movie.create(title: 'Star Wars: Episode II - Attack of the Clones', tmdb_id: 1894, image_url: '/2vcNFtrZXNwIcBgH5e2xXCmVR8t.jpg')
+Movie.create(title: 'Terminator Genisys', tmdb_id: 87101, image_url: '/5JU9ytZJyR3zmClGmVm9q4Geqbd.jpg')
+Movie.create(title: 'The Avengers', tmdb_id: 24428, image_url: '/cezWGskPY5x7GaglTTRN4Fugfb8.jpg')
+Movie.create(title: "The Devil's Double", tmdb_id: 62630, image_url: '/df536wZ17wHIW1hqGJNDXhBE3Hl.jpg')
+Movie.create(title: 'The Fate of the Furious', tmdb_id: 337339, image_url: '/iNpz2DgTsTMPaDRZq2tnbqjL2vF.jpg')
+Movie.create(title: 'The Hobbit: An Unexpected Journey', tmdb_id: 49051, image_url: '/ysX7vDmSh5O19vFjAi56WL7l4nk.jpg')
+Movie.create(title: 'The Lord of the Rings: The Fellowship of the Ring', tmdb_id: 8293, image_url: '/bxVxZb5O9OxCO0oRUNdCnpy9NST.jpg')
+Movie.create(title: 'The Lord of the Rings: The Return of the King', tmdb_id: 122, image_url: '/uexxR7Kw1qYbZk0RYaF9Rx5ykbj.jpg')
+Movie.create(title: 'The Man from U.N.C.L.E.', tmdb_id: 203801, image_url: '/5ttOaThDVmTpV8iragbrhdfxEep.jpg')
+Movie.create(title: 'The Matrix', tmdb_id: 603, image_url: '/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg')
+Movie.create(title: 'The Matrix Reloaded', tmdb_id: 604, image_url: '/ezIurBz2fdUc68d98Fp9dRf5ihv.jpg')
+Movie.create(title: 'The Pink Panther', tmdb_id: 12096, image_url: '/eNzbcO8Mps96Zycg6DSFn9b1aO1.jpg')
+Movie.create(title: 'Dead Snow 2: Red vs. Dead', tmdb_id: 241842, image_url: '/dLd6A24aHTTBZo8R7OAFzthr6h2.jpg')
+Movie.create(title: 'X-Men: Apocalypse', tmdb_id: 246655, image_url: '/zSouWWrySXshPCT4t3UKCQGayyo.jpg')
+Movie.create(title: 'X-Men: First Class', tmdb_id: 49538, image_url: '/7SSm7BfzFoVzmd6fCDccj7qRxc8.jpg')
+#######################################
+#++++++++++++++++ROLES++++++++++++++++#
+#######################################
+
+#######################################
+#++++++++++++++++PATHS++++++++++++++++#
+#######################################
