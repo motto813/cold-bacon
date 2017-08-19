@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Game Management", type: :request do
-  describe "start a game" do
+  describe "creating a game" do
     context "creates a game that will have actors to choose from" do
       let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
       let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
@@ -24,7 +24,7 @@ RSpec.describe "Game Management", type: :request do
     end
   end
 
-  describe "shows the game status" do
+  describe "showing a game" do
     let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
     let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
     let!(:movie) { Movie.create!(title: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
@@ -96,7 +96,7 @@ RSpec.describe "Game Management", type: :request do
     end
   end
 
-  describe "find an actor's top movies index" do
+  describe "finding an actor's top movies index" do
     context "requests from an actor that has top movies" do
       let!(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "bill.jpg") }
 
@@ -121,7 +121,7 @@ RSpec.describe "Game Management", type: :request do
     end
   end
 
-  describe "find a movie's top actors index" do
+  describe "finding a movie's top actors index" do
     let!(:movie) { Movie.create!(title: "The Rock", tmdb_id: 9802, image_url: "the-rock.jpg") }
 
     context "requests from a movie that has top billed actors" do
