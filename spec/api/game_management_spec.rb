@@ -80,13 +80,14 @@ RSpec.describe "Game Management", type: :request do
         expect(response).to have_http_status(302)
       end
 
-      it "does not create a path if winning move is made" do
+      it "creates a path if winning move is made" do
         post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: game.ending_actor.id } }
 
         get "/games/#{assigns(:game).id}"
         game_response = JSON.parse(response.body)
 
-        expect(game_response["paths"]).to be_empty
+        expect(game_response["paths"][0]["traceable_id"]).to eq game.ending_actor.id
+        expect(game_response["paths"][0]["game_id"]).to eq game.id
       end
 
       it "returns a path with an actor that a path has been created for and for the correct game" do
@@ -111,24 +112,13 @@ RSpec.describe "Game Management", type: :request do
     let!(:movie) { Movie.create!(title: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
     let!(:game) { Game.create! }
 
-    context "creating an actor path" do
-      it "redirects to an actor if an actor path is created" do
-        actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg")
+    it "redirects to show path if an traceable path is created" do
+      actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg")
 
-        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
+      post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
 
-        expect(response).to redirect_to actor3
-        expect(response).to have_http_status(302)
-      end
-    end
-
-    context "creating a movie path" do
-      it "redirects to a movie if a movie path is created" do
-        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Movie", traceable_id: movie.id } }
-
-        expect(response).to redirect_to movie
-        expect(response).to have_http_status(302)
-      end
+      expect(response).to redirect_to assigns(:path)
+      expect(response).to have_http_status(302)
     end
   end
 
