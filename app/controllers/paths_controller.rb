@@ -2,11 +2,15 @@ class PathsController < ApplicationController
   def create
     @game = Game.find(params[:game_id])
     @path = Path.new(path_params.merge(game: @game))
-    if @path.save
-      redirect_to @path.traceable
-    else
-      render body: nil, status: 400
-    end
+    # if path_params["traceable_id"] != @game.ending_actor.id.to_s
+      if @path.save
+        redirect_to @path.traceable
+      else
+        render body: nil, status: 400
+      end
+    # else
+    #   redirect_to @game, status: 302
+    # end
   end
 
   private

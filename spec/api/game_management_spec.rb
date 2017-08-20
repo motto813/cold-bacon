@@ -58,7 +58,7 @@ RSpec.describe "Game Management", type: :request do
     context "a game has at least one movie path saved" do
       let!(:game) { Game.create! }
 
-      it "saves an movie path and responds with a JSON object with a path that has an movie" do
+      it "saves an movie path and responds with a JSON object with a path that has a movie" do
 
         post "/games/#{game.id}/paths", params: { path: { traceable_type: "Movie", traceable_id: movie.id } }
 
@@ -69,6 +69,21 @@ RSpec.describe "Game Management", type: :request do
         expect(game["paths"].first["traceable_id"]).to eq movie.id
       end
     end
+
+    context "a game is won" do
+      let!(:game) { Game.create! }
+
+      it "does not create a path if clicked actor == ending actor" do
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: game.ending_actor.id } }
+
+        # get "/games/#{assigns(:game).id}"
+        # game = JSON.parse(response.body)
+
+        # expect(response).to redirect_to game
+        # expect(response).to have_http_status(302)
+      end
+    end
+
   end
 
   describe "creating a path" do
