@@ -1,4 +1,9 @@
 class PathsController < ApplicationController
+  def show
+    @path = Path.find(params[:id])
+    p @path
+  end
+
   def create
     @game = Game.find(params[:game_id])
     @path = Path.new(path_params.merge(game: @game))
