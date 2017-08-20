@@ -1,7 +1,12 @@
 class PathsController < ApplicationController
   def show
     @path = Path.find(params[:id])
-    p @path
+    if @path.traceable_type == "Actor"
+      @traceables = @path.traceable.get_top_movies
+    elsif @path.traceable_type == "Movie"
+      @traceables = @path.traceable.get_top_billed_actors
+    end
+    render json: { game_id: @path.game.id, traceable: @path.traceable, traceables: @traceables }
   end
 
   def create

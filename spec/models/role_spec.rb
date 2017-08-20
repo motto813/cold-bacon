@@ -4,7 +4,7 @@ RSpec.describe Role, type: :model do
 
    context "has attributes that pass validation" do
     let(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "profile.jpg") }
-    let(:movie) { Movie.create!(title: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
+    let(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
     let(:role) { Role.create!(actor: actor, movie: movie) }
 
     it "is a Role object" do
@@ -23,17 +23,17 @@ RSpec.describe Role, type: :model do
       expect(role.movie).to be_instance_of Movie
     end
 
-    it "has a movie with a title" do
-      expect(role.movie.title).to eq "The Rock"
+    it "has a movie with a name" do
+      expect(role.movie.name).to eq "The Rock"
     end
 
   end
 
   context "will not pass validations when attributes are not present" do
     let(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "profile.jpg") }
-    let(:movie) { Movie.create!(title: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
+    let(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
 
-    it "does not save when title is not present" do
+    it "does not save when name is not present" do
       role = Role.new(actor: actor)
       expect(role.save).to be false
     end

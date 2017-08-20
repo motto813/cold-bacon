@@ -27,7 +27,7 @@ RSpec.describe "Game Management", type: :request do
   describe "showing a game" do
     let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
     let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
-    let!(:movie) { Movie.create!(title: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
+    let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
 
     context "a game has just been started" do
       it "responds with a JSON object with a starting and ending actor" do
@@ -109,7 +109,7 @@ RSpec.describe "Game Management", type: :request do
   describe "creating a path" do
     let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
     let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
-    let!(:movie) { Movie.create!(title: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
+    let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
     let!(:game) { Game.create! }
 
     it "redirects to show path if an traceable path is created" do
@@ -120,55 +120,69 @@ RSpec.describe "Game Management", type: :request do
       expect(response).to redirect_to assigns(:path)
       expect(response).to have_http_status(302)
     end
-  end
 
-  describe "finding an actor's top movies index" do
-    context "requests from an actor that has top movies" do
-      let!(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "bill.jpg") }
+    it "returns a response with the show path" do
+      VCR.use_cassette "Actor Bill Murray" do
+        actor3 = Actor.create!(name: "Bill Murray", tmdb_id: 3, image_url: "bill.jpg")
 
-      it "returns OK with content type as JSON" do
-        VCR.use_cassette "Actor Bill Murray" do
-          get "/actors/#{actor.id}/movies"
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
+        get "/paths/#{assigns(:path).id}"
 
-          expect(response.content_type).to eq("application/json")
-          expect(response).to have_http_status(200)
-        end
-      end
+        p path_response = JSON.parse(response.body)
 
-      it "returns a JSON with multiple movies" do
-        VCR.use_cassette "Actor Bill Murray" do
-          get "/actors/#{actor.id}/movies"
-
-          movies = JSON.parse(response.body)
-          expect(movies.length).to be > 0
-          movies.each { |movie| expect(movie["title"].length).to be > 0 }
-        end
+        expect(path_response["game_id"]).to eq game.id
+        expect(path_response["traceable"]["id"]).to eq actor3.id
       end
     end
   end
 
-  describe "finding a movie's top actors index" do
-    let!(:movie) { Movie.create!(title: "The Rock", tmdb_id: 9802, image_url: "the-rock.jpg") }
+  # describe "finding an actor's top movies index" do
+  #   context "requests from an actor that has top movies" do
+  #     let!(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "bill.jpg") }
 
-    context "requests from a movie that has top billed actors" do
-      it "returns OK with content type as JSON" do
-        VCR.use_cassette "Movie The Rock" do
-          get "/movies/#{movie.id}/actors"
+  #     it "returns OK with content type as JSON" do
+  #       VCR.use_cassette "Actor Bill Murray" do
+  #         get "/actors/#{actor.id}/movies"
 
-          expect(response.content_type).to eq("application/json")
-          expect(response).to have_http_status(200)
-        end
-      end
+  #         expect(response.content_type).to eq("application/json")
+  #         expect(response).to have_http_status(200)
+  #       end
+  #     end
 
-      it "returns a JSON with multiple actors" do
-        VCR.use_cassette "Movie The Rock" do
-          get "/movies/#{movie.id}/actors"
+  #     it "returns a JSON with multiple movies" do
+  #       VCR.use_cassette "Actor Bill Murray" do
+  #         get "/actors/#{actor.id}/movies"
 
-          actors = JSON.parse(response.body)
-          expect(actors.length).to be > 0
-          actors.each { |actor| expect(actor["name"].length).to be > 0 }
-        end
-      end
-    end
-  end
+  #         movies = JSON.parse(response.body)
+  #         expect(movies.length).to be > 0
+  #         movies.each { |movie| expect(movie["name"].length).to be > 0 }
+  #       end
+  #     end
+  #   end
+  # end
+
+  # describe "finding a movie's top actors index" do
+  #   let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 9802, image_url: "the-rock.jpg") }
+
+  #   context "requests from a movie that has top billed actors" do
+  #     it "returns OK with content type as JSON" do
+  #       VCR.use_cassette "Movie The Rock" do
+  #         get "/movies/#{movie.id}/actors"
+
+  #         expect(response.content_type).to eq("application/json")
+  #         expect(response).to have_http_status(200)
+  #       end
+  #     end
+
+  #     it "returns a JSON with multiple actors" do
+  #       VCR.use_cassette "Movie The Rock" do
+  #         get "/movies/#{movie.id}/actors"
+
+  #         actors = JSON.parse(response.body)
+  #         expect(actors.length).to be > 0
+  #         actors.each { |actor| expect(actor["name"].length).to be > 0 }
+  #       end
+  #     end
+  #   end
+  # end
 end
