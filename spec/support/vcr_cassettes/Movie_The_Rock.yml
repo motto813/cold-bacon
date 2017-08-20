@@ -1,0 +1,143 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.themoviedb.org/3/movie/9802/casts?api_key=bcd158ce3aca8369ca10bc884546da6e
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - ETag, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After
+      Cache-Control:
+      - public, max-age=28800
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sat, 19 Aug 2017 19:32:42 GMT
+      Etag:
+      - '"a4b53abb8abbf1123e4694b8a3751f8c"'
+      Server:
+      - openresty
+      Vary:
+      - Accept-Encoding
+      X-Memc:
+      - HIT
+      X-Memc-Age:
+      - '10515'
+      X-Memc-Expires:
+      - '18285'
+      X-Memc-Key:
+      - ddcd08c228a72e0988300f926222630b
+      X-Ratelimit-Limit:
+      - '40'
+      X-Ratelimit-Remaining:
+      - '39'
+      X-Ratelimit-Reset:
+      - '1503171172'
+      Content-Length:
+      - '9616'
+      X-Cache:
+      - MISS from m00180A854B18
+      X-Cache-Lookup:
+      - MISS from m00180A854B18:3128
+      Via:
+      - 1.1 m00180A854B18 (squid/3.5.19)
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"id":9802,"cast":[{"cast_id":20,"character":"John Patrick Mason","credit_id":"52fe4530c3a36847f80c12b5","gender":2,"id":738,"name":"Sean
+        Connery","order":0,"profile_path":"/ce84udJZ9QRSR44jxwK2apM3DM8.jpg"},{"cast_id":2,"character":"Dr.
+        Stanley Goodspeed","credit_id":"52fe4530c3a36847f80c1253","gender":2,"id":2963,"name":"Nicolas
+        Cage","order":1,"profile_path":"/fW37Gbk5PJZuXvyZwtcr0cMwPKY.jpg"},{"cast_id":3,"character":"Brigadier
+        General Francis X. Hummel, USMC","credit_id":"52fe4530c3a36847f80c1257","gender":2,"id":228,"name":"Ed
+        Harris","order":2,"profile_path":"/a9ITc3shCAWjV4qKf3rgR0Opu3y.jpg"},{"cast_id":4,"character":"FBI
+        Director James Womack","credit_id":"52fe4530c3a36847f80c125b","gender":2,"id":34691,"name":"John
+        Spencer","order":3,"profile_path":"/9sU5FEzlf921n6NxHmXgJB3994T.jpg"},{"cast_id":5,"character":"Major
+        Tom Baxter","credit_id":"52fe4530c3a36847f80c125f","gender":2,"id":52,"name":"David
+        Morse","order":4,"profile_path":"/5PuSGfBw3Hsdo5jkhZ59NDFCZUm.jpg"},{"cast_id":6,"character":"Special
+        Agent Ernest Paxton","credit_id":"52fe4530c3a36847f80c1263","gender":2,"id":4520,"name":"William
+        Forsythe","order":5,"profile_path":"/3oaz2y7hIm3r3OyDKvQ1i2D8cLR.jpg"},{"cast_id":21,"character":"Commander
+        Charles Anderson","credit_id":"52fe4530c3a36847f80c12b9","gender":2,"id":2712,"name":"Michael
+        Biehn","order":6,"profile_path":"/sTk3ltlHRvRg5quheWBxaLdLgC8.jpg"},{"cast_id":22,"character":"Carla
+        Pestalozzi","credit_id":"52fe4530c3a36847f80c12bd","gender":0,"id":169586,"name":"Vanessa
+        Marcil","order":7,"profile_path":"/8fMG3u3TlW661ZdaOkIFIooCVxR.jpg"},{"cast_id":23,"character":"Marine
+        Captain Hendrix","credit_id":"52fe4530c3a36847f80c12c1","gender":2,"id":11885,"name":"John
+        C. McGinley","order":8,"profile_path":"/6AJL0ylRtJ9vcR57yEenhWHXHFt.jpg"},{"cast_id":24,"character":"Sergeant
+        Crisp","credit_id":"52fe4530c3a36847f80c12c5","gender":2,"id":71913,"name":"Bokeem
+        Woodbine","order":9,"profile_path":"/OewCN9cV4xwvMwPwBw05kqKy2v.jpg"},{"cast_id":25,"character":"Jade
+        Angelou","credit_id":"52fe4530c3a36847f80c12c9","gender":1,"id":4174,"name":"Claire
+        Forlani","order":10,"profile_path":"/6XIXq8n2epBQBvnbU1BXyNJyPYA.jpg"},{"cast_id":26,"character":"Captain
+        Frye","credit_id":"52fe4530c3a36847f80c12cd","gender":2,"id":10000,"name":"Gregory
+        Sporleder","order":11,"profile_path":"/xkgNtF5JZE56vhE22fA6lG7cwWD.jpg"},{"cast_id":27,"character":"Captain
+        Darrow","credit_id":"52fe4530c3a36847f80c12d1","gender":2,"id":19384,"name":"Tony
+        Todd","order":12,"profile_path":"/cdAjek2f4uKFsGD8CIaWM2JFhT.jpg"},{"cast_id":29,"character":"Private
+        Gamble","credit_id":"52fe4530c3a36847f80c12d9","gender":2,"id":58950,"name":"Greg
+        Collins","order":13,"profile_path":"/lrY41HBJIjWWBdxRZlfLM0av3JE.jpg"},{"cast_id":30,"character":"Private
+        Cox","credit_id":"52fe4530c3a36847f80c12dd","gender":2,"id":166893,"name":"Brendan
+        Kelly","order":14,"profile_path":"/1jWjK4GEnBvSI9dgXhgBXkTTopG.jpg"},{"cast_id":31,"character":"Private
+        McCoy","credit_id":"52fe4530c3a36847f80c12e1","gender":2,"id":2202,"name":"Steve
+        Harris","order":15,"profile_path":"/ec3hNbeFCvtIe4JqGtskQ0mhITt.jpg"},{"cast_id":32,"character":"Lieutenant
+        Shephard","credit_id":"52fe4530c3a36847f80c12e5","gender":2,"id":8540,"name":"Danny
+        Nucci","order":16,"profile_path":"/q1KztDGVWkVzbKYlj5GAoojpQc4.jpg"},{"cast_id":33,"character":"Stacy
+        Richards","credit_id":"52fe4530c3a36847f80c12e9","gender":0,"id":170696,"name":"Celeste
+        Weaver","order":17,"profile_path":"/6QZbSxEDPAxZ0Tf9FkHV5mFKu77.jpg"},{"cast_id":34,"character":"Marvin
+        Isherwood","credit_id":"52fe4530c3a36847f80c12ed","gender":2,"id":3230,"name":"Todd
+        Louiso","order":18,"profile_path":"/e4PTxmKUB0qGBusuNjqMvhjGELK.jpg"},{"cast_id":35,"character":"Dr.
+        Ling","credit_id":"52fe4530c3a36847f80c12f1","gender":2,"id":11659,"name":"David
+        Bowe","order":19,"profile_path":"/7LQANqwm1g9X9YmMwDHqdqJ9uK9.jpg"},{"cast_id":36,"character":"Agent
+        Margie Wood","credit_id":"52fe4530c3a36847f80c12f5","gender":0,"id":106709,"name":"Raquel
+        Krelle","order":20,"profile_path":null},{"cast_id":38,"character":"Private
+        Scarpetti","credit_id":"560c6940c3a368682400667a","gender":0,"id":1235953,"name":"Jim
+        Maniaci","order":21,"profile_path":null},{"cast_id":56,"character":"Navy Seals","credit_id":"594e7af9c3a36832ad0381a0","gender":2,"id":1838353,"name":"Billy
+        Devlin","order":22,"profile_path":"/dnxo4BhdJk2LWYnhz7zLiuZZ9mt.jpg"},{"cast_id":55,"character":"Lonner
+        (uncredited)","credit_id":"56877e73c3a3685f8900ce7e","gender":2,"id":3982,"name":"Xander
+        Berkeley","order":23,"profile_path":"/vlZ9FDMk2Xd1WHixPKxnheZoXgR.jpg"},{"cast_id":57,"character":"Sergeant
+        Rojas","credit_id":"5995cc6b92514124da00013f","gender":2,"id":58650,"name":"Raymond
+        Cruz","order":24,"profile_path":"/4k0r3xJjgTac5GiJoHDDBVAFYcj.jpg"}],"crew":[{"credit_id":"566b77c39251415ec50061b7","department":"Production","gender":1,"id":2324,"job":"Casting","name":"Heidi
+        Levitt","profile_path":null},{"credit_id":"52fe4530c3a36847f80c1281","department":"Production","gender":2,"id":770,"job":"Producer","name":"Jerry
+        Bruckheimer","profile_path":"/lQu9eRzRX264j2LFQwvKC50wb9s.jpg"},{"credit_id":"52fe4530c3a36847f80c12a5","department":"Sound","gender":2,"id":947,"job":"Original
+        Music Composer","name":"Hans Zimmer","profile_path":"/7IjJpvGtCfY0DsritmfCh2iX9I4.jpg"},{"credit_id":"52fe4530c3a36847f80c1287","department":"Production","gender":2,"id":738,"job":"Executive
+        Producer","name":"Sean Connery","profile_path":"/ce84udJZ9QRSR44jxwK2apM3DM8.jpg"},{"credit_id":"52fe4530c3a36847f80c128d","department":"Production","gender":2,"id":771,"job":"Producer","name":"Don
+        Simpson","profile_path":"/vYpPZLSh4ylzgP5KsEUnjt1UDRh.jpg"},{"credit_id":"52fe4530c3a36847f80c1269","department":"Directing","gender":2,"id":865,"job":"Director","name":"Michael
+        Bay","profile_path":"/cBJX9TOcJk1RQDaKrgYJRvYNUq1.jpg"},{"credit_id":"52fe4530c3a36847f80c12ab","department":"Camera","gender":2,"id":892,"job":"Director
+        of Photography","name":"John Schwartzman","profile_path":null},{"credit_id":"566b74fa92514169e200652f","department":"Art","gender":2,"id":896,"job":"Production
+        Design","name":"Michael White","profile_path":null},{"credit_id":"566b77cf9251417383005c7d","department":"Production","gender":2,"id":3192,"job":"Casting","name":"Billy
+        Hopkins","profile_path":"/vTGamEl7a1D93TCh165v8IyZZMG.jpg"},{"credit_id":"52fe4530c3a36847f80c12b1","department":"Editing","gender":2,"id":6581,"job":"Editor","name":"Richard
+        Francis-Bruce","profile_path":null},{"credit_id":"566b76d8c3a36834c1006569","department":"Sound","gender":2,"id":5132,"job":"Music
+        Editor","name":"Bob Badami","profile_path":null},{"credit_id":"566b75ed9251412dbc0011ae","department":"Crew","gender":0,"id":10118,"job":"Stunt
+        Coordinator","name":"Kenny Bates","profile_path":null},{"credit_id":"566b75a4c3a3680e73001058","department":"Art","gender":1,"id":13588,"job":"Set
+        Decoration","name":"Rosemary Brandenburg","profile_path":"/rrlIjwGSprN47jjXCVIhoIBjKXr.jpg"},{"credit_id":"566b766692514125d30012a3","department":"Sound","gender":0,"id":42034,"job":"Sound
+        Re-Recording Mixer","name":"Greg P. Russell","profile_path":null},{"credit_id":"52fe4530c3a36847f80c126f","department":"Writing","gender":2,"id":24049,"job":"Screenplay","name":"David
+        Weisberg","profile_path":null},{"credit_id":"52fe4530c3a36847f80c1299","department":"Production","gender":2,"id":24050,"job":"Executive
+        Producer","name":"William Stuart","profile_path":null},{"credit_id":"52fe4530c3a36847f80c129f","department":"Sound","gender":2,"id":57263,"job":"Original
+        Music Composer","name":"Nick Glennie-Smith","profile_path":"/sCNYdoHmQdkeu5LPTy22xtRVkFI.jpg"},{"credit_id":"52fe4530c3a36847f80c1293","department":"Production","gender":0,"id":57652,"job":"Executive
+        Producer","name":"Louis A. Stroller","profile_path":null},{"credit_id":"52fe4530c3a36847f80c1275","department":"Writing","gender":2,"id":59331,"job":"Screenplay","name":"Douglas
+        Cook","profile_path":null},{"credit_id":"52fe4530c3a36847f80c127b","department":"Writing","gender":0,"id":59332,"job":"Screenplay","name":"Mark
+        Rosner","profile_path":null},{"credit_id":"566b7536c3a36836b4009d85","department":"Costume
+        & Make-Up","gender":1,"id":59710,"job":"Costume Design","name":"Bobbie Read","profile_path":null},{"credit_id":"566b76edc3a3682647005ed1","department":"Costume
+        & Make-Up","gender":0,"id":1206905,"job":"Costume Supervisor","name":"James
+        W. Tyson","profile_path":null},{"credit_id":"566b76c59251415001000cba","department":"Sound","gender":2,"id":1347755,"job":"Music
+        Editor","name":"John Finklea","profile_path":null},{"credit_id":"566b769ec3a3682647005ebf","department":"Sound","gender":2,"id":1378168,"job":"Supervising
+        Sound Editor","name":"George Watters II","profile_path":null},{"credit_id":"566b76419251415ec500615a","department":"Sound","gender":2,"id":1378171,"job":"Sound
+        Re-Recording Mixer","name":"Kevin O''Connell","profile_path":null},{"credit_id":"566b75bbc3a36834c1006524","department":"Camera","gender":0,"id":1378240,"job":"Still
+        Photographer","name":"Frank Masi","profile_path":null},{"credit_id":"566b755f9251415001000c61","department":"Directing","gender":1,"id":1400738,"job":"Script
+        Supervisor","name":"Karen Golden","profile_path":null},{"credit_id":"554426b8c3a3680ce60030d5","department":"Visual
+        Effects","gender":0,"id":1447503,"job":"Modeling","name":"Matsune Suzuki","profile_path":null},{"credit_id":"566b757d9251417383005bfd","department":"Directing","gender":0,"id":1531867,"job":"Script
+        Supervisor","name":"Jeanne Byrd","profile_path":null},{"credit_id":"566b761a9251415ec500614e","department":"Sound","gender":0,"id":1547897,"job":"Sound
+        mixer","name":"Keith A. Wester","profile_path":null}]}'
+    http_version: 
+  recorded_at: Sat, 19 Aug 2017 19:32:42 GMT
+recorded_with: VCR 3.0.3

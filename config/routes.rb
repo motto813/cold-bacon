@@ -8,5 +8,7 @@ Rails.application.routes.draw do
     resources :actors, only: [:index]
   end
 
-  resources :games, only: [:show, :create]
+  resources :games, only: [:show, :create] do
+    resources :paths, only: [:create]
+  end
 end
