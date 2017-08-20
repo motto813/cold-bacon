@@ -124,14 +124,16 @@ RSpec.describe "Game Management", type: :request do
     it "returns a response with the show path" do
       VCR.use_cassette "Actor Bill Murray" do
         actor3 = Actor.create!(name: "Bill Murray", tmdb_id: 3, image_url: "bill.jpg")
+        role = Role.create!(actor: actor3, movie: movie)
 
         post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
         get "/paths/#{assigns(:path).id}"
 
-        p path_response = JSON.parse(response.body)
+        path_response = JSON.parse(response.body)
 
         expect(path_response["game_id"]).to eq game.id
         expect(path_response["traceable"]["id"]).to eq actor3.id
+        expect(path_response["traceables"][0]["id"]).to eq movie.id
       end
     end
   end
