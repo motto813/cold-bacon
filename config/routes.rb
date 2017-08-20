@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :games, only: [:show, :create] do
-    resources :paths, only: [:create]
+    resources :paths, only: [:index, :create]
   end
 
   resources :paths, only: [:show]

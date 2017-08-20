@@ -40,67 +40,25 @@ RSpec.describe "Game Management", type: :request do
       end
     end
 
-    context "a game has at least one actor path saved" do
-      let!(:game) { Game.create! }
-
-      it "saves an actor path and responds with a JSON object with a path that has an actor" do
-        actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg")
-
-        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
-
-        get "/games/#{assigns(:game).id}"
-        game = JSON.parse(response.body)
-
-        expect(game["paths"].first["traceable_type"]).to eq "Actor"
-        expect(game["paths"].first["traceable_id"]).to eq actor3.id
-      end
-    end
-
-    context "a game has at least one movie path saved" do
-      let!(:game) { Game.create! }
-
-      it "saves an movie path and responds with a JSON object with a path that has a movie" do
-        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Movie", traceable_id: movie.id } }
-
-        get "/games/#{assigns(:game).id}"
-        game = JSON.parse(response.body)
-
-        expect(game["paths"].first["traceable_type"]).to eq "Movie"
-        expect(game["paths"].first["traceable_id"]).to eq movie.id
-      end
-    end
-
     context "a game is won" do
       let!(:game) { Game.create! }
 
-      it "redirect to finished game and send status code" do
+      it "redirect to paths index and send status code" do
         post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: game.ending_actor.id } }
 
-        expect(response).to redirect_to game
+        expect(response).to redirect_to game_paths_path(game)
         expect(response).to have_http_status(302)
       end
 
-      it "creates a path if winning move is made" do
+      it "traceables include starting and ending actor" do
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: game.starting_actor.id } }
         post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: game.ending_actor.id } }
 
-        get "/games/#{assigns(:game).id}"
-        game_response = JSON.parse(response.body)
+        get "/games/#{game.id}/paths"
+        paths_response = JSON.parse(response.body)
 
-        expect(game_response["paths"][0]["traceable_id"]).to eq game.ending_actor.id
-        expect(game_response["paths"][0]["game_id"]).to eq game.id
-      end
-
-      it "returns a path with an actor that a path has been created for and for the correct game" do
-        actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg")
-
-        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
-        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: game.ending_actor.id } }
-
-        get "/games/#{assigns(:game).id}"
-        game_response = JSON.parse(response.body)
-
-        expect(game_response["paths"][0]["traceable_id"]).to eq actor3.id
-        expect(game_response["paths"][0]["game_id"]).to eq game.id
+        expect(paths_response.first["id"]).to eq game.starting_actor.id
+        expect(paths_response.last["id"]).to eq game.ending_actor.id
       end
     end
 
@@ -138,53 +96,40 @@ RSpec.describe "Game Management", type: :request do
     end
   end
 
-  # describe "finding an actor's top movies index" do
-  #   context "requests from an actor that has top movies" do
-  #     let!(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "bill.jpg") }
+  describe "path index" do
+    let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
+    let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
+    let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
 
-  #     it "returns OK with content type as JSON" do
-  #       VCR.use_cassette "Actor Bill Murray" do
-  #         get "/actors/#{actor.id}/movies"
+    context "a game has at least one actor path saved" do
+      let!(:game) { Game.create! }
 
-  #         expect(response.content_type).to eq("application/json")
-  #         expect(response).to have_http_status(200)
-  #       end
-  #     end
+      it "saves an actor path and responds with a JSON object with a path that has an actor" do
+        actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg")
 
-  #     it "returns a JSON with multiple movies" do
-  #       VCR.use_cassette "Actor Bill Murray" do
-  #         get "/actors/#{actor.id}/movies"
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
 
-  #         movies = JSON.parse(response.body)
-  #         expect(movies.length).to be > 0
-  #         movies.each { |movie| expect(movie["name"].length).to be > 0 }
-  #       end
-  #     end
-  #   end
-  # end
+        get "/games/#{game.id}/paths"
+        paths_response = JSON.parse(response.body)
 
-  # describe "finding a movie's top actors index" do
-  #   let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 9802, image_url: "the-rock.jpg") }
+        # expect(paths_response["paths"].first["traceable_type"]).to eq "Actor"
+        expect(paths_response.first["id"]).to eq actor3.id
+      end
+    end
 
-  #   context "requests from a movie that has top billed actors" do
-  #     it "returns OK with content type as JSON" do
-  #       VCR.use_cassette "Movie The Rock" do
-  #         get "/movies/#{movie.id}/actors"
+    context "a game has at least one movie path saved" do
+      let!(:game) { Game.create! }
 
-  #         expect(response.content_type).to eq("application/json")
-  #         expect(response).to have_http_status(200)
-  #       end
-  #     end
+      it "saves a movie path and responds with a JSON object with a path that has a movie" do
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Movie", traceable_id: movie.id } }
 
-  #     it "returns a JSON with multiple actors" do
-  #       VCR.use_cassette "Movie The Rock" do
-  #         get "/movies/#{movie.id}/actors"
+        get "/games/#{game.id}/paths"
+        paths_response = JSON.parse(response.body)
 
-  #         actors = JSON.parse(response.body)
-  #         expect(actors.length).to be > 0
-  #         actors.each { |actor| expect(actor["name"].length).to be > 0 }
-  #       end
-  #     end
-  #   end
-  # end
+        # expect(paths_response["paths"].first["traceable_type"]).to eq "Movie"
+        expect(paths_response.first["id"]).to eq movie.id
+      end
+    end
+  end
+
 end
