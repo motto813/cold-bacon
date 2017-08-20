@@ -5,7 +5,7 @@ RSpec.describe Path, type: :model do
   let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
 
   context "has attributes that pass validation" do
-    let(:movie) { Movie.create!(title: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
+    let(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
     let(:game) { Game.create! }
 
     it "is a Path object" do
@@ -30,7 +30,7 @@ RSpec.describe Path, type: :model do
 
     it "can have a movie and access the tile" do
       path = Path.create!(game_id: game.id, traceable: movie)
-      expect(path.traceable.title).to eq "The Rock"
+      expect(path.traceable.name).to eq "The Rock"
     end
 
     it "can have a Movie object" do
@@ -41,7 +41,7 @@ RSpec.describe Path, type: :model do
   end
 
   context "will not pass validations when attributes are not present or are not valid" do
-    let(:movie) { Movie.create!(title: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
+    let(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
     let(:game) { Game.create! }
 
     it "does not save when actor is invalid" do

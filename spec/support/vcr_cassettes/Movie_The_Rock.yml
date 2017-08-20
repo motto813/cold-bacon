@@ -25,9 +25,9 @@ http_interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sat, 19 Aug 2017 19:32:42 GMT
+      - Sun, 20 Aug 2017 19:48:22 GMT
       Etag:
-      - '"a4b53abb8abbf1123e4694b8a3751f8c"'
+      - '"ea96e135babde7a1f6f6bbdbfe1d1665"'
       Server:
       - openresty
       Vary:
@@ -35,9 +35,9 @@ http_interactions:
       X-Memc:
       - HIT
       X-Memc-Age:
-      - '10515'
+      - '10333'
       X-Memc-Expires:
-      - '18285'
+      - '18467'
       X-Memc-Key:
       - ddcd08c228a72e0988300f926222630b
       X-Ratelimit-Limit:
@@ -45,13 +45,15 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '39'
       X-Ratelimit-Reset:
-      - '1503171172'
+      - '1503258512'
       Content-Length:
       - '9616'
+      Age:
+      - '119'
       X-Cache:
-      - MISS from m00180A854B18
+      - HIT from m00180A854B18
       X-Cache-Lookup:
-      - MISS from m00180A854B18:3128
+      - HIT from m00180A854B18:3128
       Via:
       - 1.1 m00180A854B18 (squid/3.5.19)
       Connection:
@@ -106,38 +108,38 @@ http_interactions:
         (uncredited)","credit_id":"56877e73c3a3685f8900ce7e","gender":2,"id":3982,"name":"Xander
         Berkeley","order":23,"profile_path":"/vlZ9FDMk2Xd1WHixPKxnheZoXgR.jpg"},{"cast_id":57,"character":"Sergeant
         Rojas","credit_id":"5995cc6b92514124da00013f","gender":2,"id":58650,"name":"Raymond
-        Cruz","order":24,"profile_path":"/4k0r3xJjgTac5GiJoHDDBVAFYcj.jpg"}],"crew":[{"credit_id":"566b77c39251415ec50061b7","department":"Production","gender":1,"id":2324,"job":"Casting","name":"Heidi
-        Levitt","profile_path":null},{"credit_id":"52fe4530c3a36847f80c1281","department":"Production","gender":2,"id":770,"job":"Producer","name":"Jerry
-        Bruckheimer","profile_path":"/lQu9eRzRX264j2LFQwvKC50wb9s.jpg"},{"credit_id":"52fe4530c3a36847f80c12a5","department":"Sound","gender":2,"id":947,"job":"Original
-        Music Composer","name":"Hans Zimmer","profile_path":"/7IjJpvGtCfY0DsritmfCh2iX9I4.jpg"},{"credit_id":"52fe4530c3a36847f80c1287","department":"Production","gender":2,"id":738,"job":"Executive
-        Producer","name":"Sean Connery","profile_path":"/ce84udJZ9QRSR44jxwK2apM3DM8.jpg"},{"credit_id":"52fe4530c3a36847f80c128d","department":"Production","gender":2,"id":771,"job":"Producer","name":"Don
-        Simpson","profile_path":"/vYpPZLSh4ylzgP5KsEUnjt1UDRh.jpg"},{"credit_id":"52fe4530c3a36847f80c1269","department":"Directing","gender":2,"id":865,"job":"Director","name":"Michael
-        Bay","profile_path":"/cBJX9TOcJk1RQDaKrgYJRvYNUq1.jpg"},{"credit_id":"52fe4530c3a36847f80c12ab","department":"Camera","gender":2,"id":892,"job":"Director
-        of Photography","name":"John Schwartzman","profile_path":null},{"credit_id":"566b74fa92514169e200652f","department":"Art","gender":2,"id":896,"job":"Production
-        Design","name":"Michael White","profile_path":null},{"credit_id":"566b77cf9251417383005c7d","department":"Production","gender":2,"id":3192,"job":"Casting","name":"Billy
-        Hopkins","profile_path":"/vTGamEl7a1D93TCh165v8IyZZMG.jpg"},{"credit_id":"52fe4530c3a36847f80c12b1","department":"Editing","gender":2,"id":6581,"job":"Editor","name":"Richard
-        Francis-Bruce","profile_path":null},{"credit_id":"566b76d8c3a36834c1006569","department":"Sound","gender":2,"id":5132,"job":"Music
-        Editor","name":"Bob Badami","profile_path":null},{"credit_id":"566b75ed9251412dbc0011ae","department":"Crew","gender":0,"id":10118,"job":"Stunt
-        Coordinator","name":"Kenny Bates","profile_path":null},{"credit_id":"566b75a4c3a3680e73001058","department":"Art","gender":1,"id":13588,"job":"Set
-        Decoration","name":"Rosemary Brandenburg","profile_path":"/rrlIjwGSprN47jjXCVIhoIBjKXr.jpg"},{"credit_id":"566b766692514125d30012a3","department":"Sound","gender":0,"id":42034,"job":"Sound
-        Re-Recording Mixer","name":"Greg P. Russell","profile_path":null},{"credit_id":"52fe4530c3a36847f80c126f","department":"Writing","gender":2,"id":24049,"job":"Screenplay","name":"David
-        Weisberg","profile_path":null},{"credit_id":"52fe4530c3a36847f80c1299","department":"Production","gender":2,"id":24050,"job":"Executive
-        Producer","name":"William Stuart","profile_path":null},{"credit_id":"52fe4530c3a36847f80c129f","department":"Sound","gender":2,"id":57263,"job":"Original
-        Music Composer","name":"Nick Glennie-Smith","profile_path":"/sCNYdoHmQdkeu5LPTy22xtRVkFI.jpg"},{"credit_id":"52fe4530c3a36847f80c1293","department":"Production","gender":0,"id":57652,"job":"Executive
-        Producer","name":"Louis A. Stroller","profile_path":null},{"credit_id":"52fe4530c3a36847f80c1275","department":"Writing","gender":2,"id":59331,"job":"Screenplay","name":"Douglas
+        Cruz","order":24,"profile_path":"/4k0r3xJjgTac5GiJoHDDBVAFYcj.jpg"}],"crew":[{"credit_id":"52fe4530c3a36847f80c1269","department":"Directing","gender":2,"id":865,"job":"Director","name":"Michael
+        Bay","profile_path":"/cBJX9TOcJk1RQDaKrgYJRvYNUq1.jpg"},{"credit_id":"52fe4530c3a36847f80c126f","department":"Writing","gender":2,"id":24049,"job":"Screenplay","name":"David
+        Weisberg","profile_path":null},{"credit_id":"52fe4530c3a36847f80c1275","department":"Writing","gender":2,"id":59331,"job":"Screenplay","name":"Douglas
         Cook","profile_path":null},{"credit_id":"52fe4530c3a36847f80c127b","department":"Writing","gender":0,"id":59332,"job":"Screenplay","name":"Mark
-        Rosner","profile_path":null},{"credit_id":"566b7536c3a36836b4009d85","department":"Costume
-        & Make-Up","gender":1,"id":59710,"job":"Costume Design","name":"Bobbie Read","profile_path":null},{"credit_id":"566b76edc3a3682647005ed1","department":"Costume
+        Rosner","profile_path":null},{"credit_id":"52fe4530c3a36847f80c1281","department":"Production","gender":2,"id":770,"job":"Producer","name":"Jerry
+        Bruckheimer","profile_path":"/lQu9eRzRX264j2LFQwvKC50wb9s.jpg"},{"credit_id":"52fe4530c3a36847f80c1287","department":"Production","gender":2,"id":738,"job":"Executive
+        Producer","name":"Sean Connery","profile_path":"/ce84udJZ9QRSR44jxwK2apM3DM8.jpg"},{"credit_id":"52fe4530c3a36847f80c128d","department":"Production","gender":2,"id":771,"job":"Producer","name":"Don
+        Simpson","profile_path":"/vYpPZLSh4ylzgP5KsEUnjt1UDRh.jpg"},{"credit_id":"52fe4530c3a36847f80c1293","department":"Production","gender":0,"id":57652,"job":"Executive
+        Producer","name":"Louis A. Stroller","profile_path":null},{"credit_id":"52fe4530c3a36847f80c1299","department":"Production","gender":2,"id":24050,"job":"Executive
+        Producer","name":"William Stuart","profile_path":null},{"credit_id":"52fe4530c3a36847f80c129f","department":"Sound","gender":2,"id":57263,"job":"Original
+        Music Composer","name":"Nick Glennie-Smith","profile_path":"/sCNYdoHmQdkeu5LPTy22xtRVkFI.jpg"},{"credit_id":"52fe4530c3a36847f80c12a5","department":"Sound","gender":2,"id":947,"job":"Original
+        Music Composer","name":"Hans Zimmer","profile_path":"/7IjJpvGtCfY0DsritmfCh2iX9I4.jpg"},{"credit_id":"52fe4530c3a36847f80c12ab","department":"Camera","gender":2,"id":892,"job":"Director
+        of Photography","name":"John Schwartzman","profile_path":null},{"credit_id":"52fe4530c3a36847f80c12b1","department":"Editing","gender":2,"id":6581,"job":"Editor","name":"Richard
+        Francis-Bruce","profile_path":null},{"credit_id":"554426b8c3a3680ce60030d5","department":"Visual
+        Effects","gender":0,"id":1447503,"job":"Modeling","name":"Matsune Suzuki","profile_path":null},{"credit_id":"566b74fa92514169e200652f","department":"Art","gender":2,"id":896,"job":"Production
+        Design","name":"Michael White","profile_path":null},{"credit_id":"566b7536c3a36836b4009d85","department":"Costume
+        & Make-Up","gender":1,"id":59710,"job":"Costume Design","name":"Bobbie Read","profile_path":null},{"credit_id":"566b755f9251415001000c61","department":"Directing","gender":1,"id":1400738,"job":"Script
+        Supervisor","name":"Karen Golden","profile_path":null},{"credit_id":"566b757d9251417383005bfd","department":"Directing","gender":0,"id":1531867,"job":"Script
+        Supervisor","name":"Jeanne Byrd","profile_path":null},{"credit_id":"566b75a4c3a3680e73001058","department":"Art","gender":1,"id":13588,"job":"Set
+        Decoration","name":"Rosemary Brandenburg","profile_path":"/rrlIjwGSprN47jjXCVIhoIBjKXr.jpg"},{"credit_id":"566b75bbc3a36834c1006524","department":"Camera","gender":0,"id":1378240,"job":"Still
+        Photographer","name":"Frank Masi","profile_path":null},{"credit_id":"566b75ed9251412dbc0011ae","department":"Crew","gender":0,"id":10118,"job":"Stunt
+        Coordinator","name":"Kenny Bates","profile_path":null},{"credit_id":"566b761a9251415ec500614e","department":"Sound","gender":0,"id":1547897,"job":"Sound
+        mixer","name":"Keith A. Wester","profile_path":null},{"credit_id":"566b76419251415ec500615a","department":"Sound","gender":2,"id":1378171,"job":"Sound
+        Re-Recording Mixer","name":"Kevin O''Connell","profile_path":null},{"credit_id":"566b766692514125d30012a3","department":"Sound","gender":0,"id":42034,"job":"Sound
+        Re-Recording Mixer","name":"Greg P. Russell","profile_path":null},{"credit_id":"566b769ec3a3682647005ebf","department":"Sound","gender":2,"id":1378168,"job":"Supervising
+        Sound Editor","name":"George Watters II","profile_path":null},{"credit_id":"566b76c59251415001000cba","department":"Sound","gender":2,"id":1347755,"job":"Music
+        Editor","name":"John Finklea","profile_path":null},{"credit_id":"566b76d8c3a36834c1006569","department":"Sound","gender":2,"id":5132,"job":"Music
+        Editor","name":"Bob Badami","profile_path":null},{"credit_id":"566b76edc3a3682647005ed1","department":"Costume
         & Make-Up","gender":0,"id":1206905,"job":"Costume Supervisor","name":"James
-        W. Tyson","profile_path":null},{"credit_id":"566b76c59251415001000cba","department":"Sound","gender":2,"id":1347755,"job":"Music
-        Editor","name":"John Finklea","profile_path":null},{"credit_id":"566b769ec3a3682647005ebf","department":"Sound","gender":2,"id":1378168,"job":"Supervising
-        Sound Editor","name":"George Watters II","profile_path":null},{"credit_id":"566b76419251415ec500615a","department":"Sound","gender":2,"id":1378171,"job":"Sound
-        Re-Recording Mixer","name":"Kevin O''Connell","profile_path":null},{"credit_id":"566b75bbc3a36834c1006524","department":"Camera","gender":0,"id":1378240,"job":"Still
-        Photographer","name":"Frank Masi","profile_path":null},{"credit_id":"566b755f9251415001000c61","department":"Directing","gender":1,"id":1400738,"job":"Script
-        Supervisor","name":"Karen Golden","profile_path":null},{"credit_id":"554426b8c3a3680ce60030d5","department":"Visual
-        Effects","gender":0,"id":1447503,"job":"Modeling","name":"Matsune Suzuki","profile_path":null},{"credit_id":"566b757d9251417383005bfd","department":"Directing","gender":0,"id":1531867,"job":"Script
-        Supervisor","name":"Jeanne Byrd","profile_path":null},{"credit_id":"566b761a9251415ec500614e","department":"Sound","gender":0,"id":1547897,"job":"Sound
-        mixer","name":"Keith A. Wester","profile_path":null}]}'
+        W. Tyson","profile_path":null},{"credit_id":"566b77c39251415ec50061b7","department":"Production","gender":1,"id":2324,"job":"Casting","name":"Heidi
+        Levitt","profile_path":null},{"credit_id":"566b77cf9251417383005c7d","department":"Production","gender":2,"id":3192,"job":"Casting","name":"Billy
+        Hopkins","profile_path":"/vTGamEl7a1D93TCh165v8IyZZMG.jpg"}]}'
     http_version: 
-  recorded_at: Sat, 19 Aug 2017 19:32:42 GMT
+  recorded_at: Sun, 20 Aug 2017 19:50:20 GMT
 recorded_with: VCR 3.0.3

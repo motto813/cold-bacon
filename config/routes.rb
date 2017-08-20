@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :games, only: [:show, :create] do
     resources :paths, only: [:create]
   end
+
+  resources :paths, only: [:show]
 end
