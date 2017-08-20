@@ -44,14 +44,15 @@ RSpec.describe "Game Management", type: :request do
       let!(:game) { Game.create! }
 
       it "saves an actor path and responds with a JSON object with a path that has an actor" do
+        actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg")
 
-        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor1.id } }
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
 
         get "/games/#{assigns(:game).id}"
         game = JSON.parse(response.body)
 
         expect(game["paths"].first["traceable_type"]).to eq "Actor"
-        expect(game["paths"].first["traceable_id"]).to eq actor1.id
+        expect(game["paths"].first["traceable_id"]).to eq actor3.id
       end
     end
 
@@ -59,7 +60,6 @@ RSpec.describe "Game Management", type: :request do
       let!(:game) { Game.create! }
 
       it "saves an movie path and responds with a JSON object with a path that has a movie" do
-
         post "/games/#{game.id}/paths", params: { path: { traceable_type: "Movie", traceable_id: movie.id } }
 
         get "/games/#{assigns(:game).id}"
@@ -73,14 +73,33 @@ RSpec.describe "Game Management", type: :request do
     context "a game is won" do
       let!(:game) { Game.create! }
 
-      it "does not create a path if clicked actor == ending actor" do
+      it "redirect to finished game and send status code" do
         post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: game.ending_actor.id } }
 
-        # get "/games/#{assigns(:game).id}"
-        # game = JSON.parse(response.body)
+        expect(response).to redirect_to game
+        expect(response).to have_http_status(302)
+      end
 
-        # expect(response).to redirect_to game
-        # expect(response).to have_http_status(302)
+      it "does not create a path if winning move is made" do
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: game.ending_actor.id } }
+
+        get "/games/#{assigns(:game).id}"
+        game_response = JSON.parse(response.body)
+
+        expect(game_response["paths"]).to be_empty
+      end
+
+      it "returns a path with an actor that a path has been created for and for the correct game" do
+        actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg")
+
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: game.ending_actor.id } }
+
+        get "/games/#{assigns(:game).id}"
+        game_response = JSON.parse(response.body)
+
+        expect(game_response["paths"][0]["traceable_id"]).to eq actor3.id
+        expect(game_response["paths"][0]["game_id"]).to eq game.id
       end
     end
 
@@ -94,9 +113,11 @@ RSpec.describe "Game Management", type: :request do
 
     context "creating an actor path" do
       it "redirects to an actor if an actor path is created" do
-        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor1.id } }
+        actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg")
 
-        expect(response).to redirect_to actor1
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
+
+        expect(response).to redirect_to actor3
         expect(response).to have_http_status(302)
       end
     end
