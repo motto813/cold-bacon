@@ -1,4 +1,10 @@
 class PathsController < ApplicationController
+  def index
+    @game = Game.find(params[:game_id])
+    @traceables = @game.paths.map { |path| path.traceable }
+    render json: @traceables
+  end
+
   def show
     @path = Path.find(params[:id])
     if @path.traceable_type == "Actor"
@@ -16,7 +22,7 @@ class PathsController < ApplicationController
       if path_params["traceable_id"].to_i != @game.ending_actor.id
         redirect_to @path
       else
-        redirect_to @game
+        redirect_to game_paths_path(@game)
       end
     else
       render body: nil, status: 400
