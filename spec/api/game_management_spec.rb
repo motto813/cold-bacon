@@ -79,7 +79,7 @@ RSpec.describe "Game Management", type: :request do
       expect(response).to have_http_status(302)
     end
 
-    it "returns a response with the show path" do
+    it "returns a response from the show path with current game, current traceable, and possible paths" do
       VCR.use_cassette "Actor Bill Murray" do
         actor3 = Actor.create!(name: "Bill Murray", tmdb_id: 3, image_url: "bill.jpg")
         role = Role.create!(actor: actor3, movie: movie)
@@ -90,8 +90,9 @@ RSpec.describe "Game Management", type: :request do
         path_response = JSON.parse(response.body)
 
         expect(path_response["game_id"]).to eq game.id
-        expect(path_response["traceable"]["id"]).to eq actor3.id
-        expect(path_response["traceables"][0]["id"]).to eq movie.id
+        expect(path_response["current_traceable"]["traceable"]["id"]).to eq actor3.id
+        expect(path_response["possible_paths"][0]["traceable_type"]).to eq movie.class.to_s
+        expect(path_response["possible_paths"][0]["traceable"]["id"]).to eq movie.id
       end
     end
   end

@@ -1,4 +1,6 @@
 class PathsController < ApplicationController
+  include PathsControllerHelper
+
   def index
     @game = Game.find(params[:game_id])
     @traceables = @game.paths.map { |path| path.traceable }
@@ -12,7 +14,7 @@ class PathsController < ApplicationController
     elsif @path.traceable_type == "Movie"
       @traceables = @path.traceable.get_top_billed_actors
     end
-    render json: { game_id: @path.game.id, traceable: @path.traceable, traceables: @traceables }
+    render json: { game_id: @path.game.id, current_traceable: insert_traceable_type(@path.traceable), possible_paths: include_traceable_type(@traceables) }
   end
 
   def create
