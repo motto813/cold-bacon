@@ -1,4 +1,10 @@
 class PathsController < ApplicationController
+  def index
+    @game = Game.find(params[:id])
+    @paths = @game.paths
+    render json: @paths
+  end
+
   def show
     @path = Path.find(params[:id])
     if @path.traceable_type == "Actor"
