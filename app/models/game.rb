@@ -8,10 +8,10 @@ class Game < ApplicationRecord
   validates_presence_of :starting_actor, :ending_actor
 
   def set_starting_actor
-    self.starting_actor = Actor.order("RANDOM()").first
+    self.starting_actor = Actor.random_qualified_starting_actors.first
   end
 
   def set_ending_actor
-    self.ending_actor = Actor.where.not(id: starting_actor.id).order("RANDOM()").first if starting_actor
+    self.ending_actor = Actor.random_qualified_starting_actors.where.not(id: starting_actor.id).first if starting_actor
   end
 end
