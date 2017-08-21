@@ -74,7 +74,7 @@ RSpec.describe "Game Management", type: :request do
         end
       end
 
-      it "returns a response for a created actor path with the correct number of possible movie paths" do
+      it "returns a response for a created actor path with the correct number of unique possible movie paths" do
         VCR.use_cassette "Actor Bill Murray" do
           actor3 = Actor.create!(name: "Bill Murray", tmdb_id: 1532, image_url: "profile.jpg", popularity: 60)
 
@@ -84,13 +84,33 @@ RSpec.describe "Game Management", type: :request do
           path_response = JSON.parse(response.body)
 
           expect(path_response["possible_paths"].length).to eq possible_paths_count
+          expect(path_response["possible_paths"].uniq.length).to eq path_response["possible_paths"].length
           path_response["possible_paths"].each do |path|
             expect(path["traceable_type"]).to eq "Movie"
           end
         end
       end
 
-      it "returns a response for a created movie path with correct number of possible actor paths" do
+      context "creating a path for an actor with popular known for movies" do
+        it "returns a response with the correct number of unique possible movie paths" do
+          VCR.use_cassette "Actor Chris Pratt" do
+            actor3 = Actor.create!(name: "Chris Pratt", tmdb_id: 73457, image_url: "profile.jpg", popularity: 60)
+
+            post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
+            get "/paths/#{assigns(:path).id}"
+
+            path_response = JSON.parse(response.body)
+
+            expect(path_response["possible_paths"].length).to eq possible_paths_count
+            expect(path_response["possible_paths"].uniq.length).to eq path_response["possible_paths"].length
+            path_response["possible_paths"].each do |path|
+              expect(path["traceable_type"]).to eq "Movie"
+            end
+          end
+        end
+      end
+
+      it "returns a response for a created movie path with correct number of unique possible actor paths" do
         VCR.use_cassette "Movie The Rock" do
           movie = Movie.create!(name: "The Rock", tmdb_id: 9802, image_url: "profile.jpg")
 
@@ -100,6 +120,7 @@ RSpec.describe "Game Management", type: :request do
           path_response = JSON.parse(response.body)
 
           expect(path_response["possible_paths"].length).to eq possible_paths_count
+          expect(path_response["possible_paths"].uniq.length).to eq path_response["possible_paths"].length
           path_response["possible_paths"].each do |path|
             expect(path["traceable_type"]).to eq "Actor"
           end
