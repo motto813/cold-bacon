@@ -64,7 +64,7 @@ class Actor < ApplicationRecord
     if all_relevant_movies.count < desired_relevant_movies
       medias = media_credits_for_actor
       popular_movies = medias.select { |media| media["media_type"] == "movie" }.sort_by { |movie| movie["popularity"] }.reverse
-      popular_movies[0...desired_relevant_movies].each do |tmdb_movie|
+      popular_movies[0...(desired_relevant_movies + 1)].each do |tmdb_movie|
         find_or_create_role_in_popular_movie_from_tmdb(tmdb_movie)
       end
     end

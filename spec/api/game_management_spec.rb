@@ -44,7 +44,6 @@ RSpec.describe "Game Management", type: :request do
   describe "creating a path" do
     let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }
     let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
-    let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
     let!(:game) { Game.create! }
 
     let(:possible_paths_count) { 8 }
@@ -52,7 +51,7 @@ RSpec.describe "Game Management", type: :request do
     context "a non-winning path is chosen" do
       it "redirects to show path if an traceable path is created" do
         VCR.use_cassette "Actor Bill Murray" do
-          actor3 = Actor.create!(name: "Bill Murray", tmdb_id: 3, image_url: "bill.jpg", popularity: 60)
+          actor3 = Actor.create!(name: "Bill Murray", tmdb_id: 1532, image_url: "profile.jpg", popularity: 60)
 
           post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
 
@@ -61,9 +60,9 @@ RSpec.describe "Game Management", type: :request do
         end
       end
 
-      it "returns a response from the show path with current game, current traceable, and correct type and number of possible paths" do
+      it "returns a response with the current game and the traceable used" do
         VCR.use_cassette "Actor Bill Murray" do
-          actor3 = Actor.create!(name: "Bill Murray", tmdb_id: 3, image_url: "bill.jpg", popularity: 60)
+          actor3 = Actor.create!(name: "Bill Murray", tmdb_id: 1532, image_url: "profile.jpg", popularity: 60)
 
           post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
           get "/paths/#{assigns(:path).id}"
@@ -72,9 +71,37 @@ RSpec.describe "Game Management", type: :request do
 
           expect(path_response["game_id"]).to eq game.id
           expect(path_response["current_traceable"]["traceable"]["id"]).to eq actor3.id
+        end
+      end
+
+      it "returns a response for a created actor path with the correct number of possible movie paths" do
+        VCR.use_cassette "Actor Bill Murray" do
+          actor3 = Actor.create!(name: "Bill Murray", tmdb_id: 1532, image_url: "profile.jpg", popularity: 60)
+
+          post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
+          get "/paths/#{assigns(:path).id}"
+
+          path_response = JSON.parse(response.body)
+
           expect(path_response["possible_paths"].length).to eq possible_paths_count
           path_response["possible_paths"].each do |path|
             expect(path["traceable_type"]).to eq "Movie"
+          end
+        end
+      end
+
+      it "returns a response for a created movie path with correct number of possible actor paths" do
+        VCR.use_cassette "Movie The Rock" do
+          movie = Movie.create!(name: "The Rock", tmdb_id: 9802, image_url: "profile.jpg")
+
+          post "/games/#{game.id}/paths", params: { path: { traceable_type: "Movie", traceable_id: movie.id } }
+          get "/paths/#{assigns(:path).id}"
+
+          path_response = JSON.parse(response.body)
+
+          expect(path_response["possible_paths"].length).to eq possible_paths_count
+          path_response["possible_paths"].each do |path|
+            expect(path["traceable_type"]).to eq "Actor"
           end
         end
       end
@@ -115,7 +142,7 @@ RSpec.describe "Game Management", type: :request do
   describe "path index" do
     let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }
     let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
-    let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
+    let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 0, image_url: "profile.jpg") }
 
     context "a game has at least one actor path saved" do
       let!(:game) { Game.create! }
