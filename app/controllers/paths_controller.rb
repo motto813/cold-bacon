@@ -21,7 +21,7 @@ class PathsController < ApplicationController
     @game = Game.find(params[:game_id])
     @path = Path.new(path_params.merge(game: @game))
     if @path.save
-      if path_params["traceable_id"].to_i != @game.ending_actor.id
+      unless path_params["traceable_id"].to_i == @game.ending_actor.id && path_params["traceable_type"] == "Actor"
         redirect_to @path
       else
         redirect_to game_paths_path(@game)

@@ -50,12 +50,12 @@ RSpec.describe "Game Management", type: :request do
         expect(response).to have_http_status(302)
       end
 
-      it "traceables include starting and ending actor" do
+      it "responds with traceables that include starting and ending actor" do
         post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: game.starting_actor.id } }
         post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: game.ending_actor.id } }
 
         get "/games/#{game.id}/paths"
-        paths_response = JSON.parse(response.body)
+        p paths_response = JSON.parse(response.body)
 
         expect(paths_response.first["id"]).to eq game.starting_actor.id
         expect(paths_response.last["id"]).to eq game.ending_actor.id
