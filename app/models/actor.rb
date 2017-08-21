@@ -3,8 +3,8 @@ class Actor < ApplicationRecord
   has_many :movies_appeared_in, through: :roles, source: :movie
   has_many :paths, as: :traceable
 
-  validates_presence_of :name, :image_url, :tmdb_id
-  validates_uniqueness_of :name, :tmdb_id
+  validates_presence_of :name, :image_url, :tmdb_id, :popularity
+  validates_uniqueness_of :tmdb_id
 
   def self.random_qualified_starting_actors
     self.popular_actors.order("RANDOM()")
@@ -52,7 +52,10 @@ class Actor < ApplicationRecord
   end
 
   def find_or_create_known_for_movie_role_from_tmdb(tmdb_movie)
-    known_for_movie = Movie.find_or_initialize_by(name: tmdb_movie["title"], tmdb_id: tmdb_movie["id"], image_url: tmdb_movie["poster_path"])
+    known_for_movie = Movie.find_or_initialize_by(tmdb_id: tmdb_movie["id"])
+    if known_for_movie.new_record?
+      known_for_movie.assign_attributes(name: tmdb_movie["name"], image_url: tmdb_movie["profile_path"])
+    end
     known_for_movie.popularity = tmdb_movie["popularity"]
     known_for_movie.save
     role = Role.find_or_initialize_by(actor: self, movie: known_for_movie)
