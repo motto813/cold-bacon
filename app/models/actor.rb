@@ -28,7 +28,8 @@ class Actor < ApplicationRecord
   end
 
   def popular_movies_featured_in
-    Tmdb::Person.credits(tmdb_id)
+    medias = Tmdb::Person.credits(tmdb_id)["cast"]
+    medias.select { |media| media["media_type"] == "movie" }.sort_by { |movie| movie["popularity"] }.reverse
   end
 
   def search_api_for_actor
