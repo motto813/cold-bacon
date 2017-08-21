@@ -1,6 +1,6 @@
 class Actor < ApplicationRecord
   has_many :roles
-  has_many :top_movies, through: :roles, source: :movie
+  has_many :movies_acted_in, through: :roles, source: :movie
   has_many :paths, as: :traceable
 
   validates_presence_of :name, :image_url, :tmdb_id
@@ -14,17 +14,17 @@ class Actor < ApplicationRecord
     self.where("popularity > ?", self.minimum_popularity)
   end
 
-  def get_top_movies
-    unless top_movies.count == number_of_top_movies
+  def most_relevant_movies
+    unless movies_acted_in.count == number_of_top_movies
       movies = known_for_movies(search_api_for_actor)
       movies.each do |movie|
-        top_movie = Movie.find_or_create_by(name: movie["title"], tmdb_id: movie["id"], image_url: movie["poster_path"])
-        # top_movie.popularity = movie["popularity"]
-        # top_movie.save
+        top_movie = Movie.find_or_initialize_by(name: movie["title"], tmdb_id: movie["id"], image_url: movie["poster_path"])
+        top_movie.popularity = movie["popularity"]
+        top_movie.save
         Role.find_or_create_by(actor: self, movie: top_movie)
       end
     end
-    top_movies
+    movies_acted_in
   end
 
   def popular_movies_featured_in
