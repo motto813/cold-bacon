@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "Game Management", type: :request do
   describe "creating a game" do
     context "creates a game that will have actors to choose from" do
-      let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
-      let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
+      let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }
+      let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
 
       it "returns OK with content type as JSON" do
         post "/games"
@@ -25,8 +25,8 @@ RSpec.describe "Game Management", type: :request do
   end
 
   describe "showing a game" do
-    let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
-    let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
+    let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }
+    let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
     let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
 
     context "a game has just been started" do
@@ -42,14 +42,14 @@ RSpec.describe "Game Management", type: :request do
   end
 
   describe "creating a path" do
-    let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
-    let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
+    let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }
+    let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
     let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
     let!(:game) { Game.create! }
 
     context "a non-winning path is chosen" do
       it "redirects to show path if an traceable path is created" do
-        actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg")
+        actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg", popularity: 60)
 
         post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
 
@@ -59,7 +59,7 @@ RSpec.describe "Game Management", type: :request do
 
       it "returns a response from the show path with current game, current traceable, and possible paths" do
         VCR.use_cassette "Actor Bill Murray" do
-          actor3 = Actor.create!(name: "Bill Murray", tmdb_id: 3, image_url: "bill.jpg")
+          actor3 = Actor.create!(name: "Bill Murray", tmdb_id: 3, image_url: "bill.jpg", popularity: 60)
           role = Role.create!(actor: actor3, movie: movie)
 
           post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
@@ -108,22 +108,21 @@ RSpec.describe "Game Management", type: :request do
   end
 
   describe "path index" do
-    let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg") }
-    let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
+    let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }
+    let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
     let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
 
     context "a game has at least one actor path saved" do
       let!(:game) { Game.create! }
 
       it "responds with a JSON object with a path that has an actor" do
-        actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg")
+        actor3 = Actor.create!(name: "Paul", tmdb_id: 3, image_url: "paul.jpg", popularity: 60)
 
         post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: actor3.id } }
 
         get "/games/#{game.id}/paths"
         paths_response = JSON.parse(response.body)
 
-        # expect(paths_response["paths"].first["traceable_type"]).to eq "Actor"
         expect(paths_response["paths_chosen"].first["id"]).to eq actor3.id
       end
     end
@@ -137,7 +136,6 @@ RSpec.describe "Game Management", type: :request do
         get "/games/#{game.id}/paths"
         paths_response = JSON.parse(response.body)
 
-        # expect(paths_response["paths"].first["traceable_type"]).to eq "Movie"
         expect(paths_response["paths_chosen"].first["id"]).to eq movie.id
       end
     end

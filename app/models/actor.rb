@@ -28,7 +28,8 @@ class Actor < ApplicationRecord
     actor_object.first["known_for"]
   end
 
-  def number_of_top_movies
-    3
-  end
+  private
+    def number_of_top_movies
+      3
+    end
 end
