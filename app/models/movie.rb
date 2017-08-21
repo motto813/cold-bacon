@@ -3,8 +3,8 @@ class Movie < ApplicationRecord
   has_many :featured_actors, through: :roles, source: :actor
   has_many :paths, as: :traceable
 
-  validates_presence_of :name, :image_url, :tmdb_id
-  validates_uniqueness_of :name, :tmdb_id
+  validates_presence_of :name, :image_url, :tmdb_id, :popularity
+  validates_uniqueness_of :tmdb_id
 
   def top_billed_actors
     find_or_create_top_billed_actors

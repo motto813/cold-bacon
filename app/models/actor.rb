@@ -3,8 +3,8 @@ class Actor < ApplicationRecord
   has_many :movies_appeared_in, through: :roles, source: :movie
   has_many :paths, as: :traceable
 
-  validates_presence_of :name, :image_url, :tmdb_id
-  validates_uniqueness_of :name, :tmdb_id
+  validates_presence_of :name, :image_url, :tmdb_id, :popularity
+  validates_uniqueness_of :tmdb_id
 
   def self.random_qualified_starting_actors
     self.popular_actors.order("RANDOM()")
