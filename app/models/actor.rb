@@ -52,7 +52,10 @@ class Actor < ApplicationRecord
   end
 
   def find_or_create_known_for_movie_role_from_tmdb(tmdb_movie)
-    known_for_movie = Movie.find_or_initialize_by(name: tmdb_movie["title"], tmdb_id: tmdb_movie["id"], image_url: tmdb_movie["poster_path"])
+    known_for_movie = Movie.find_or_initialize_by(tmdb_id: tmdb_movie["id"])
+    if known_for_movie.new_record?
+      known_for_movie.assign_attributes(name: tmdb_movie["name"], image_url: tmdb_movie["profile_path"])
+    end
     known_for_movie.popularity = tmdb_movie["popularity"]
     known_for_movie.save
     role = Role.find_or_initialize_by(actor: self, movie: known_for_movie)

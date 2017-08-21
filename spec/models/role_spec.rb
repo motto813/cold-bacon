@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Role, type: :model do
 
    context "has attributes that pass validation" do
-    let(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "profile.jpg") }
-    let(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
+    let(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "profile.jpg", popularity: 60) }
+    let(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg", popularity: 60) }
     let(:role) { Role.create!(actor: actor, movie: movie) }
 
     it "is a Role object" do
@@ -30,8 +30,8 @@ RSpec.describe Role, type: :model do
   end
 
   context "will not pass validations when attributes are not present" do
-    let(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "profile.jpg") }
-    let(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
+    let(:actor) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "profile.jpg", popularity: 60) }
+    let(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg", popularity: 60) }
 
     it "does not save when name is not present" do
       role = Role.new(actor: actor)
