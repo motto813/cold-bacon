@@ -21,7 +21,8 @@ class Movie < ApplicationRecord
     Tmdb::Movie.casts(tmdb_id)
   end
 
-  def number_of_top_billed_actors
-    8
-  end
+  private
+    def number_of_top_billed_actors
+      8
+    end
 end

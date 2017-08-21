@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Path, type: :model do
-  let!(:actor1) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "profile.jpg") }
-  let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg") }
+  let!(:actor1) { Actor.create!(name: "Bill Murray", tmdb_id: 1, image_url: "profile.jpg", popularity: 60) }
+  let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
 
   context "has attributes that pass validation" do
     let(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg") }
