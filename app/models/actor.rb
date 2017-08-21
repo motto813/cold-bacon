@@ -19,10 +19,16 @@ class Actor < ApplicationRecord
       movies = known_for_movies(search_api_for_actor)
       movies.each do |movie|
         top_movie = Movie.find_or_create_by(name: movie["title"], tmdb_id: movie["id"], image_url: movie["poster_path"])
+        # top_movie.popularity = movie["popularity"]
+        # top_movie.save
         Role.find_or_create_by(actor: self, movie: top_movie)
       end
     end
     top_movies
+  end
+
+  def popular_movies_featured_in
+    Tmdb::Person.credits(tmdb_id)
   end
 
   def search_api_for_actor
