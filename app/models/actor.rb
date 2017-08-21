@@ -87,15 +87,15 @@ class Actor < ApplicationRecord
   end
 
   private
-    def desired_relevant_movies
-      8
-    end
+  def desired_relevant_movies
+    8
+  end
 
-    def desired_known_for_movies
-      3
-    end
+  def desired_known_for_movies
+    3
+  end
 
-    def self.minimum_popularity
-      7.00
-    end
+  def self.minimum_popularity
+    7.00
+  end
 end
