@@ -4,7 +4,7 @@ class PathsController < ApplicationController
   def index
     @game = Game.find(params[:game_id])
     @traceables = @game.paths.map { |path| path.traceable }
-    render json: @traceables
+    render json: { game_is_finished: @game.is_finished, paths_chosen: @traceables }
   end
 
   def show
@@ -21,9 +21,11 @@ class PathsController < ApplicationController
     @game = Game.find(params[:game_id])
     @path = Path.new(path_params.merge(game: @game))
     if @path.save
-      if path_params["traceable_id"].to_i != @game.ending_actor.id
+      unless path_params["traceable_id"].to_i == @game.ending_actor.id && path_params["traceable_type"] == "Actor"
         redirect_to @path
       else
+        @game.is_finished = true
+        @game.save
         redirect_to game_paths_path(@game)
       end
     else
