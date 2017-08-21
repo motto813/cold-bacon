@@ -15,9 +15,17 @@ class Actor < ApplicationRecord
   end
 
   def most_relevant_movies
+    populate_movie_categories
+    all_relevant_movies.limit(8)
+  end
+
+  def populate_movie_categories
     find_or_create_known_for_movies
     find_or_create_popular_movies_appeared_in
-    movies_appeared_in.joins(:roles).order("roles.is_known_for ASC", popularity: :desc).limit(8)
+  end
+
+  def all_relevant_movies
+    movies_appeared_in.joins(:roles).order("roles.is_known_for ASC", popularity: :desc)
   end
 
   def find_or_create_known_for_movies
@@ -53,7 +61,7 @@ class Actor < ApplicationRecord
   end
 
   def find_or_create_popular_movies_appeared_in
-    if popular_movies_appeared_in.count < desired_relevant_movies
+    if all_relevant_movies.count < desired_relevant_movies
       medias = media_credits_for_actor
       popular_movies = medias.select { |media| media["media_type"] == "movie" }.sort_by { |movie| movie["popularity"] }.reverse
       popular_movies[0...desired_relevant_movies].each do |tmdb_movie|
