@@ -8,7 +8,7 @@ class Movie < ApplicationRecord
 
   def top_billed_actors
     find_or_create_top_billed_actors
-    featured_actors.order(popularity: :desc).limit(8)
+    featured_actors.order(created_at: :asc).limit(8)
   end
 
   def find_or_create_top_billed_actors
