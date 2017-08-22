@@ -25,7 +25,7 @@ class Actor < ApplicationRecord
   end
 
   def all_relevant_movies
-    movies_appeared_in.joins(:roles).order("roles.is_known_for ASC", popularity: :desc)
+    movies_appeared_in.includes(:roles).order("roles.is_known_for ASC", popularity: :desc)
   end
 
   def find_or_create_known_for_movies
@@ -37,7 +37,7 @@ class Actor < ApplicationRecord
   end
 
   def known_for_movies
-    movies_appeared_in.joins(:roles).where("roles.is_known_for = ?", true)
+    movies_appeared_in.includes(:roles).where("roles.is_known_for = ?", true)
   end
 
   def tmdb_chosen_known_for_movies
@@ -67,14 +67,14 @@ class Actor < ApplicationRecord
     if all_relevant_movies.count < desired_relevant_movies
       medias = media_credits_for_actor
       popular_movies = medias.select { |media| media["media_type"] == "movie" }.sort_by { |movie| movie["popularity"] }.reverse
-      popular_movies[0...(desired_relevant_movies + 1)].each do |tmdb_movie|
+      popular_movies[0...(desired_relevant_movies + 3)].each do |tmdb_movie|
         find_or_create_role_in_popular_movie_from_tmdb(tmdb_movie)
       end
     end
   end
 
   def popular_movies_appeared_in
-    movies_appeared_in.joins(:roles).where("roles.is_known_for = ? OR roles.is_known_for IS ?", false, nil)
+    movies_appeared_in.includes(:roles).where("roles.is_known_for = ? OR roles.is_known_for IS ?", false, nil)
   end
 
   def media_credits_for_actor
@@ -82,7 +82,10 @@ class Actor < ApplicationRecord
   end
 
   def find_or_create_role_in_popular_movie_from_tmdb(tmdb_movie)
-    popular_movie = Movie.find_or_initialize_by(name: tmdb_movie["title"], tmdb_id: tmdb_movie["id"], image_url: tmdb_movie["poster_path"])
+    popular_movie = Movie.find_or_initialize_by(tmdb_id: tmdb_movie["id"])
+    if popular_movie.new_record?
+      popular_movie.assign_attributes(name: tmdb_movie["title"], image_url: tmdb_movie["poster_path"])
+    end
     popular_movie.popularity = tmdb_movie["popularity"]
     popular_movie.save
     role = Role.find_or_initialize_by(actor: self, movie: popular_movie)
