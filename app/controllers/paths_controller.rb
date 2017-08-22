@@ -4,7 +4,7 @@ class PathsController < ApplicationController
   def index
     @game = Game.find(params[:game_id])
     @traceables = @game.paths.map { |path| path.traceable }
-    render json: { game_is_finished: @game.is_finished, paths_chosen: @traceables }
+    render json: { game_id: @game.id, game_is_finished: @game.is_finished, paths_chosen: @traceables }
   end
 
   def show
