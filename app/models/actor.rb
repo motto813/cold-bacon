@@ -6,6 +6,14 @@ class Actor < ApplicationRecord
   validates_presence_of :name, :image_url, :tmdb_id, :popularity
   validates_uniqueness_of :tmdb_id
 
+  validate :not_on_hollywood_blacklist
+
+  def not_on_hollywood_blacklist
+    if hollywood_blacklist.includes?(tmdb_id)
+      errors.add(:name, "We don't serve Eggs Benedict")
+    end
+  end
+
   def self.random_qualified_starting_actors
     self.popular_actors.order("RANDOM()")
   end
@@ -103,5 +111,11 @@ class Actor < ApplicationRecord
 
   def self.minimum_popularity
     7.00
+  end
+
+  def hollywood_blacklist
+    [
+      71580, # Benedict Cumbersnooch
+    ]
   end
 end
