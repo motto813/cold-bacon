@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   end
 
   resources :paths, only: [:show]
+
+  post '/games/create_demo', to: 'games#create_demo'
 end
