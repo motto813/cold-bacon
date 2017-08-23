@@ -14,7 +14,7 @@ class PathsController < ApplicationController
     elsif @path.traceable_type == "Movie"
       @traceables = @path.traceable.top_billed_actors
     end
-    render json: { game_id: @path.game.id, current_traceable: insert_traceable_type(@path.traceable), possible_paths: include_traceable_type(@traceables), ending_traceable: @path.game.ending_actor, is_movie: (@path.traceable_type == "Actor") }
+    render json: { game_id: @path.game.id, current_traceable: insert_traceable_type(@path.traceable), possible_paths: include_traceable_type(@traceables), ending_traceable: insert_traceable_type(@path.game.ending_actor), is_movie: (@path.traceable_type == "Actor") }
   end
 
   def create
