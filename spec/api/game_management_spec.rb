@@ -1,16 +1,29 @@
 require 'rails_helper'
 
+# Kevin Bacon tmdb_id: 4724
+# Ice Cube tmdb_id: 9778
+
 RSpec.describe "Game Management", type: :request do
   describe "creating a game" do
     context "creates a game that will have actors to choose from" do
       let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }
       let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
+      let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg", popularity: 60) }
 
       it "returns OK with content type as JSON" do
         post "/games"
 
         expect(response).to redirect_to assigns(:game)
         expect(response).to have_http_status(302)
+      end
+
+      it "responds with a JSON object with a starting and ending actor" do
+        post "/games"
+        get "/games/#{assigns(:game).id}"
+        game = JSON.parse(response.body)
+
+        expect(game["starting_actor"]["name"]).to eq("Sam").or(eq("Jack"))
+        expect(game["ending_actor"]["name"]).to eq("Sam").or(eq("Jack"))
       end
     end
 
@@ -24,22 +37,47 @@ RSpec.describe "Game Management", type: :request do
     end
   end
 
-  describe "showing a game" do
-    let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }
-    let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
-    let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg", popularity: 60) }
+  describe "creating a demo game" do
+    let(:starting_tmdb) { 9778 }
+    let(:ending_tmdb) { 4724 }
 
-    context "a game has just been started" do
-      it "responds with a JSON object with a starting and ending actor" do
-        post "/games"
+    it "returns OK with content type as JSON" do
+      VCR.use_cassette "Demo Game Actors" do
+        post "/create_demo/#{starting_tmdb}/#{ending_tmdb}"
+
+        expect(response).to redirect_to assigns(:game)
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    it "responds with the requested starting and ending actor" do
+      VCR.use_cassette "Demo Game Actors" do
+        post "/create_demo/#{starting_tmdb}/#{ending_tmdb}"
         get "/games/#{assigns(:game).id}"
-        game = JSON.parse(response.body)
+        game_response = JSON.parse(response.body)
 
-        expect(game["starting_actor"]["name"]).to eq("Sam").or(eq("Jack"))
-        expect(game["ending_actor"]["name"]).to eq("Sam").or(eq("Jack"))
+        expect(game_response["starting_actor"]["tmdb_id"]).to eq starting_tmdb
+        expect(game_response["ending_actor"]["tmdb_id"]).to eq ending_tmdb
       end
     end
   end
+
+  # describe "showing a game" do
+  #   let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }
+  #   let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
+  #   let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg", popularity: 60) }
+
+  #   context "a game has just been started" do
+  #     it "responds with a JSON object with a starting and ending actor" do
+  #       post "/games"
+  #       get "/games/#{assigns(:game).id}"
+  #       game = JSON.parse(response.body)
+
+  #       expect(game["starting_actor"]["name"]).to eq("Sam").or(eq("Jack"))
+  #       expect(game["ending_actor"]["name"]).to eq("Sam").or(eq("Jack"))
+  #     end
+  #   end
+  # end
 
   describe "creating a path" do
     let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }

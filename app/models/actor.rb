@@ -14,6 +14,19 @@ class Actor < ApplicationRecord
     end
   end
 
+  def self.find_or_create_by_tmdb_id(tmdb_id)
+    actor = self.find_or_initialize_by(tmdb_id: tmdb_id)
+    if actor.new_record?
+      tmdb_actor = Tmdb::Person.detail(tmdb_id)
+      actor.assign_attributes(name: tmdb_actor["name"], image_url: tmdb_actor["profile_path"], popularity: tmdb_actor["popularity"])
+    end
+    if actor.tmdb_id == kevin_bacon_tmdb_id
+      actor.popularity = 10000
+    end
+    actor.save
+    actor
+  end
+
   def self.random_qualified_starting_actors
     self.popular_actors.order("RANDOM()")
   end
@@ -113,9 +126,14 @@ class Actor < ApplicationRecord
     7.00
   end
 
+  def self.kevin_bacon_tmdb_id
+    4724
+  end
+
   def cold_bacon_blacklist
     [
       71580, # Benedict Cumbersnooch
+      127558, #Andrea Riseborough
     ]
   end
 end

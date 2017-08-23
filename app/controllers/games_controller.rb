@@ -26,20 +26,12 @@ class GamesController < ApplicationController
 
   private
   def set_demo_starting_actor
-    demo_starting_actor = Actor.find_or_initialize_by(tmdb_id: 9778)
-    if demo_starting_actor.new_record?
-      demo_starting_actor.assign_attributes(name: "Ice Cube", image_url: "/dzdn1tyWkC4EjlBVKvpAhg5osYA.jpg", popularity: 6.46)
-      demo_starting_actor.save
-    end
-    @game.starting_actor = demo_starting_actor
+    @game.starting_actor = Actor.find_or_create_by_tmdb_id(params[:starting_tmdb])
   end
 
   def set_demo_ending_actor
-    demo_ending_actor = Actor.find_or_initialize_by(tmdb_id: 4724)
-    if demo_ending_actor.new_record?
-      demo_ending_actor.assign_attributes(name: "Kevin Bacon", image_url: "/p1uCaOjxSC1xS5TgmD4uloAkbLd.jpg", popularity: 10000)
-      demo_ending_actor.save
-    end
-    @game.ending_actor = demo_ending_actor
+    @game.ending_actor = Actor.find_or_create_by_tmdb_id(params[:ending_tmdb])
   end
 end
+
+# (name: "Kevin Bacon", image_url: "/p1uCaOjxSC1xS5TgmD4uloAkbLd.jpg", popularity: 10000)
