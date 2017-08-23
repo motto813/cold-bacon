@@ -6,10 +6,10 @@ class Actor < ApplicationRecord
   validates_presence_of :name, :image_url, :tmdb_id, :popularity
   validates_uniqueness_of :tmdb_id
 
-  validate :not_on_hollywood_blacklist
+  validate :not_on_cold_bacon_blacklist
 
-  def not_on_hollywood_blacklist
-    if hollywood_blacklist.includes?(tmdb_id)
+  def not_on_cold_bacon_blacklist
+    if cold_bacon_blacklist.include?(tmdb_id)
       errors.add(:name, "We don't serve Eggs Benedict")
     end
   end
@@ -113,7 +113,7 @@ class Actor < ApplicationRecord
     7.00
   end
 
-  def hollywood_blacklist
+  def cold_bacon_blacklist
     [
       71580, # Benedict Cumbersnooch
     ]
