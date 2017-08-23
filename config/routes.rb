@@ -14,5 +14,5 @@ Rails.application.routes.draw do
 
   resources :paths, only: [:show]
 
-  post '/games/create_demo', to: 'games#create_demo'
+  post '/create_demo/:starting_tmdb/:ending_tmdb', to: 'games#create_demo'
 end

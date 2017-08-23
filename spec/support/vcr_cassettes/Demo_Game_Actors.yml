@@ -1,0 +1,107 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.themoviedb.org/3/person/9778?api_key=bcd158ce3aca8369ca10bc884546da6e
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - ETag, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 23 Aug 2017 20:10:04 GMT
+      Etag:
+      - 00ac8ed3b4327bdd4ebbebcb2ba10a00
+      Server:
+      - openresty
+      X-Ratelimit-Limit:
+      - '40'
+      X-Ratelimit-Remaining:
+      - '39'
+      X-Ratelimit-Reset:
+      - '1503519014'
+      Content-Length:
+      - '610'
+      X-Cache:
+      - MISS from m00180A854B18
+      X-Cache-Lookup:
+      - MISS from m00180A854B18:3128
+      Via:
+      - 1.1 m00180A854B18 (squid/3.5.19)
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"birthday":"1969-06-15","deathday":null,"id":9778,"name":"Ice Cube","also_known_as":["Ice
+        Cube Nwa","O''Shea Jackson","Westside Connection","N.W.A.","NWA"],"gender":2,"biography":"O''Shea
+        Jackson, better known by his stage name Ice Cube, is an American rapper, record
+        producer, actor, screenwriter, film producer, and director. He began his career
+        as a member of the hip-hop group C.I.A. and later joined N.W.A.","popularity":5.464888,"place_of_birth":"Los
+        Angeles, California, USA ","profile_path":"\/dzdn1tyWkC4EjlBVKvpAhg5osYA.jpg","adult":false,"imdb_id":"nm0001084","homepage":"http:\/\/www.icecube.com\/"}'
+    http_version: 
+  recorded_at: Wed, 23 Aug 2017 20:10:04 GMT
+- request:
+    method: get
+    uri: http://api.themoviedb.org/3/person/4724?api_key=bcd158ce3aca8369ca10bc884546da6e
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - ETag, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 23 Aug 2017 20:10:04 GMT
+      Etag:
+      - 7b13b2203029ed80337f27127a9f1d28
+      Server:
+      - openresty
+      X-Ratelimit-Limit:
+      - '40'
+      X-Ratelimit-Remaining:
+      - '38'
+      X-Ratelimit-Reset:
+      - '1503519014'
+      Content-Length:
+      - '993'
+      X-Cache:
+      - MISS from m00180A854B18
+      X-Cache-Lookup:
+      - MISS from m00180A854B18:3128
+      Via:
+      - 1.1 m00180A854B18 (squid/3.5.19)
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJiaXJ0aGRheSI6IjE5NTgtMDctMDgiLCJkZWF0aGRheSI6bnVsbCwiaWQiOjQ3MjQsIm5hbWUiOiJLZXZpbiBCYWNvbiIsImFsc29fa25vd25fYXMiOlsiS2V2aW4gTm9yd29vZCBCYWNvbiJdLCJnZW5kZXIiOjIsImJpb2dyYXBoeSI6IktldmluIE5vcndvb2QgQmFjb24gKGJvcm4gSnVseSA4LCAxOTU4KSBpcyBhbiBBbWVyaWNhbiBmaWxtIGFuZCB0aGVhdGVyIGFjdG9yIHdob3NlIG5vdGFibGUgcm9sZXMgaW5jbHVkZSBBbmltYWwgSG91c2UsIERpbmVyLCBGb290bG9vc2UsIEZsYXRsaW5lcnMsIEEgRmV3IEdvb2QgTWVuLCBBcG9sbG8gMTMsIE15c3RpYyBSaXZlciwgVGhlIFdvb2RzbWFuLCBGcmlkYXkgdGhlIDEzdGgsIEhvbGxvdyBNYW4sIFRyZW1vcnMgYW5kIEZyb3N0XC9OaXhvbi5cblxuQmFjb24gaGFzIHdvbiBHb2xkZW4gR2xvYmUgYW5kIFNjcmVlbiBBY3RvcnMgR3VpbGQgQXdhcmRzLCB3YXMgbm9taW5hdGVkIGZvciBhbiBFbW15IEF3YXJkLCBhbmQgd2FzIG5hbWVkIGJ5IFRoZSBHdWFyZGlhbiBhcyBvbmUgb2YgdGhlIGJlc3QgYWN0b3JzIG5ldmVyIHRvIGhhdmUgcmVjZWl2ZWQgYW4gQWNhZGVteSBBd2FyZCBub21pbmF0aW9uLlxuXG5JbiAyMDAzLCBCYWNvbiByZWNlaXZlZCBhIHN0YXIgb24gdGhlIEhvbGx5d29vZCBXYWxrIG9mIEZhbWUuXG5cbsKgRGVzY3JpcHRpb24gYWJvdmUgZnJvbSB0aGUgV2lraXBlZGlhIGFydGljbGUgS2V2aW4gQmFjb24sIGxpY2Vuc2VkIHVuZGVyIENDLUJZLVNBLCBmdWxsIGxpc3Qgb2YgY29udHJpYnV0b3JzIG9uIFdpa2lwZWRpYS4iLCJwb3B1bGFyaXR5Ijo0LjE3NjM3MywicGxhY2Vfb2ZfYmlydGgiOiJQaGlsYWRlbHBoaWEsIFBlbm5zeWx2YW5pYSwgVVNBIiwicHJvZmlsZV9wYXRoIjoiXC9wMXVDYU9qeFNDMXhTNVRnbUQ0dWxvQWtiTGQuanBnIiwiYWR1bHQiOmZhbHNlLCJpbWRiX2lkIjoibm0wMDAwMTAyIiwiaG9tZXBhZ2UiOiJodHRwOlwvXC93d3cuYmFjb25icm9zLmNvbSJ9
+    http_version: 
+  recorded_at: Wed, 23 Aug 2017 20:10:04 GMT
+recorded_with: VCR 3.0.3
