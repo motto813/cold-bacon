@@ -33,5 +33,3 @@ class GamesController < ApplicationController
     @game.ending_actor = Actor.find_or_create_by_tmdb_id(params[:ending_tmdb])
   end
 end
-
-# (name: "Kevin Bacon", image_url: "/p1uCaOjxSC1xS5TgmD4uloAkbLd.jpg", popularity: 10000)

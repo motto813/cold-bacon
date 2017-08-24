@@ -46,6 +46,9 @@ gem 'webmock'
 #   gem 'database_cleaner'
 # end
 
+# Coveralls for test coverage
+gem 'coveralls', require: false
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
