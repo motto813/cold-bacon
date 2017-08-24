@@ -26,3 +26,6 @@ config/database.yml
 
 # Ignore ruby version
 .ruby-version
+
+# Ignore coverage directory
+/coverage/
