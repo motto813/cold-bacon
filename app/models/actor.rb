@@ -133,7 +133,8 @@ class Actor < ApplicationRecord
   def cold_bacon_blacklist
     [
       71580, # Benedict Cumbersnooch
-      127558, #Andrea Riseborough
+      127558, # Andrea Riseborough
+      62965, # Miranda Hart
     ]
   end
 end

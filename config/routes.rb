@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :paths, only: [:index, :create]
   end
 
+  resources :actors, only: [:show]
+  resources :movies, only: [:show]
   resources :paths, only: [:show]
 
   post '/create_demo/:starting_tmdb/:ending_tmdb', to: 'games#create_demo'
