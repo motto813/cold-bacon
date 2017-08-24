@@ -62,23 +62,6 @@ RSpec.describe "Game Management", type: :request do
     end
   end
 
-  # describe "showing a game" do
-  #   let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }
-  #   let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
-  #   let!(:movie) { Movie.create!(name: "The Rock", tmdb_id: 1, image_url: "profile.jpg", popularity: 60) }
-
-  #   context "a game has just been started" do
-  #     it "responds with a JSON object with a starting and ending actor" do
-  #       post "/games"
-  #       get "/games/#{assigns(:game).id}"
-  #       game = JSON.parse(response.body)
-
-  #       expect(game["starting_actor"]["name"]).to eq("Sam").or(eq("Jack"))
-  #       expect(game["ending_actor"]["name"]).to eq("Sam").or(eq("Jack"))
-  #     end
-  #   end
-  # end
-
   describe "creating a path" do
     let!(:actor1) { Actor.create!(name: "Sam", tmdb_id: 1, image_url: "sam.jpg", popularity: 60) }
     let!(:actor2) { Actor.create!(name: "Jack", tmdb_id: 2, image_url: "jack.jpg", popularity: 60) }
