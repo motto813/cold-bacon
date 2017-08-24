@@ -4,8 +4,8 @@
 
 ## Contributors
 * Alan English - github.com/alanenglish
-* Tyler Fridley - github.com/motto813
-* Paul Hammerschmidt - github.com/fridl8
+* Tyler Fridley - github.com/fridl8
+* Paul Hammerschmidt - github.com/motto813
 
 ### Dev Bootcamp Phase 3 Final Project
 
