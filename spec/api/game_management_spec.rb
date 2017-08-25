@@ -41,23 +41,36 @@ RSpec.describe "Game Management", type: :request do
     let(:starting_tmdb) { 9778 }
     let(:ending_tmdb) { 4724 }
 
-    it "returns OK with content type as JSON" do
-      VCR.use_cassette "Demo Game Actors" do
-        post "/create_demo/#{starting_tmdb}/#{ending_tmdb}"
+    context "sending valid params in the url" do
+      it "returns OK with content type as JSON" do
+        VCR.use_cassette "Demo Game Actors" do
+          post "/create_demo/#{starting_tmdb}/#{ending_tmdb}"
 
-        expect(response).to redirect_to assigns(:game)
-        expect(response).to have_http_status(302)
+          expect(response).to redirect_to assigns(:game)
+          expect(response).to have_http_status(302)
+        end
+      end
+
+      it "responds with the requested starting and ending actor" do
+        VCR.use_cassette "Demo Game Actors" do
+          post "/create_demo/#{starting_tmdb}/#{ending_tmdb}"
+          get "/games/#{assigns(:game).id}"
+          game_response = JSON.parse(response.body)
+
+          expect(game_response["starting_actor"]["tmdb_id"]).to eq starting_tmdb
+          expect(game_response["ending_actor"]["tmdb_id"]).to eq ending_tmdb
+        end
       end
     end
 
-    it "responds with the requested starting and ending actor" do
-      VCR.use_cassette "Demo Game Actors" do
-        post "/create_demo/#{starting_tmdb}/#{ending_tmdb}"
-        get "/games/#{assigns(:game).id}"
-        game_response = JSON.parse(response.body)
+    context "sending invalid params in the url" do
+      it "returns nothing with a status of 400" do
+        VCR.use_cassette "Invalid TMDB Ids" do
+          post "/create_demo/not_an_int/non_an_int"
 
-        expect(game_response["starting_actor"]["tmdb_id"]).to eq starting_tmdb
-        expect(game_response["ending_actor"]["tmdb_id"]).to eq ending_tmdb
+          expect(response.body).to eq ""
+          expect(response).to have_http_status(400)
+        end
       end
     end
   end
@@ -68,6 +81,15 @@ RSpec.describe "Game Management", type: :request do
     let!(:game) { Game.create! }
 
     let(:possible_paths_count) { 8 }
+
+    context "the request includes a non-existent traceable" do
+      it "returns nothing with a status of 400" do
+        post "/games/#{game.id}/paths", params: { path: { traceable_type: "Actor", traceable_id: 0 } }
+
+        expect(response.body).to eq ""
+        expect(response).to have_http_status(400)
+      end
+    end
 
     context "a non-winning path is chosen" do
       it "redirects to show path if an traceable path is created" do

@@ -23,8 +23,8 @@ class Actor < ApplicationRecord
     if actor.tmdb_id == kevin_bacon_tmdb_id
       actor.popularity = 10000
     end
-    actor.save
-    actor
+    return actor if actor.save
+    nil
   end
 
   def self.random_qualified_starting_actors
@@ -92,10 +92,6 @@ class Actor < ApplicationRecord
         find_or_create_role_in_popular_movie_from_tmdb(tmdb_movie)
       end
     end
-  end
-
-  def popular_movies_appeared_in
-    movies_appeared_in.includes(:roles).where("roles.is_known_for = ? OR roles.is_known_for IS ?", false, nil)
   end
 
   def media_credits_for_actor
