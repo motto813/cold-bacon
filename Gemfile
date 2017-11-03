@@ -41,6 +41,9 @@ gem 'json'
 # Webmock for HTTP Requests
 gem 'webmock'
 
+# Rack::Cors to handle cross origin requests
+gem 'rack-cors', :require => 'rack/cors'
+
 # group :test do
 #   # Database cleaner
 #   gem 'database_cleaner'
