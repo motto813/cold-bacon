@@ -55,6 +55,7 @@ class Actor < ApplicationRecord
         find_or_create_known_for_movie_role_from_tmdb(tmdb_movie)
       end
     end
+    known_for_movies
   end
 
   def known_for_movies
