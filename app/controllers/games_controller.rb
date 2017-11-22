@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  before_action :clear_paths_and_games, only: [:create, :create_demo]
+
   def show
     @game = Game.find(params[:id])
     render json: { starting_actor: @game.starting_actor, ending_actor: @game.ending_actor, game_id: @game.id }
@@ -25,6 +27,11 @@ class GamesController < ApplicationController
   end
 
   private
+  def clear_paths_and_games
+    Path.delete_all
+    Game.delete_all
+  end
+
   def set_demo_starting_actor
     @game.starting_actor = Actor.find_or_create_by_tmdb_id(params[:starting_tmdb])
   end

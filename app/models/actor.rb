@@ -119,7 +119,7 @@ class Actor < ApplicationRecord
   end
 
   def self.minimum_popularity
-    7.00
+    9.00
   end
 
   def self.kevin_bacon_tmdb_id
@@ -128,9 +128,9 @@ class Actor < ApplicationRecord
 
   def cold_bacon_blacklist
     [
-      71580, # Benedict Cumbersnooch
-      127558, # Andrea Riseborough
-      62965, # Miranda Hart
+      # 71580, # Benedict Cumbersnooch
+      # 127558, # Andrea Riseborough
+      # 62965, # Miranda Hart
     ]
   end
 end
