@@ -52,7 +52,7 @@ RSpec.describe Actor, type: :model do
   end
 
   context "is on the cold bacon blacklist" do
-    it "does not save the actor" do
+    xit "does not save the actor" do
       actor = Actor.new(name: "Benedict Cumberbatch", tmdb_id: 71580, image_url: "profile.jpg", popularity: 60)
       expect(actor.save).to be false
     end

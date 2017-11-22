@@ -3,9 +3,9 @@ class Game < ApplicationRecord
   belongs_to :starting_actor, class_name: "Actor"
   belongs_to :ending_actor, class_name: "Actor"
 
-  before_validation :set_starting_actor, :set_ending_actor
-
   validates_presence_of :starting_actor, :ending_actor
+
+  before_validation :set_starting_actor, :set_ending_actor
 
   def set_starting_actor
     self.starting_actor ||= Actor.random_qualified_starting_actors.first
