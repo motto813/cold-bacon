@@ -1,4 +1,4 @@
-# Cold Bacon
+# Cold Bacon (Interesting project)
 
 [![Coverage Status](https://coveralls.io/repos/github/motto813/cold-bacon/badge.svg?branch=master)](https://coveralls.io/github/motto813/cold-bacon?branch=master)
 
